@@ -3,7 +3,6 @@ import posed from 'react-pose';
 import PropTypes from 'prop-types';
 import { logic, fadeAnimation } from './animations';
 import Slide from './Slide';
-// import { SlideshowPose } from './Slideshow.css.js'
 
 class Poses extends Component {
   constructor(props) {

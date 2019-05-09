@@ -1,5 +1,4 @@
 node_modules
 .DS_Store
 dist/
-Slideshow.css.js
 Slideshow.story.js
