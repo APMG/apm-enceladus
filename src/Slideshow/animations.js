@@ -17,7 +17,7 @@ const spring = {
   }
 };
 
-export const slideAnimation = {
+const slideAnimation = {
   states: {
     main: {
       x: 0,
@@ -38,7 +38,7 @@ export const slideAnimation = {
   logic: 'slide'
 };
 
-export const fadeAnimation = {
+const fadeAnimation = {
   states: {
     fadein: {
       opacity: 1,
@@ -62,3 +62,8 @@ export function logic(type, i, j) {
       return;
   }
 }
+
+export const animations = {
+  fade: fadeAnimation,
+  slide: slideAnimation
+};

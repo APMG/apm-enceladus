@@ -121,13 +121,13 @@ class Slideshow extends Component {
 
 Slideshow.propTypes = {
   images: PropTypes.array.isRequired,
-  animation: PropTypes.object,
+  animation: PropTypes.oneOf(['fade', 'slide']),
   elementClass: PropTypes.string
 };
 // The animation object is allowed to be "loose". It's just potentially too variable to test here, and if you mess it up, it shouldn't crash anything -- your animation just won't work.
 
 Slideshow.defaultProps = {
-  elementClass: ''
+  animation: 'fade'
 };
 
 export default Slideshow;
