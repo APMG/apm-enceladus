@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, cleanup, wait, prettyDOM } from 'react-testing-library';
+import { render, fireEvent, cleanup, wait } from 'react-testing-library';
 import { images } from './data/slideshow';
 import Slideshow from '../Slideshow';
 import { slideAnimation } from '../animations';
@@ -125,7 +125,9 @@ describe('Loads the correct animation', () => {
 
     getByTestId('slideshow').childNodes.forEach((node, i) => {
       if (i === 1) {
-        expect(node.firstChild.getAttribute('style')).toBe('opacity: 1; transform: none;');
+        expect(node.firstChild.getAttribute('style')).toBe(
+          'opacity: 1; transform: none;'
+        );
       } else {
         expect(node.firstChild.getAttribute('style')).toBe(
           'opacity: 0; transform: translateX(100px) translateZ(0);'

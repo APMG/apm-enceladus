@@ -1,2 +1,2 @@
-import Image from './Image/Image';
-export { Image };
+import Slideshow from './Slideshow/Slideshow';
+export { Slideshow };

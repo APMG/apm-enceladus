@@ -3,7 +3,7 @@ import posed from 'react-pose';
 import PropTypes from 'prop-types';
 import { logic, fadeAnimation } from './animations';
 import Slide from './Slide';
-import { SlideshowPose } from './Slideshow.css.js'
+// import { SlideshowPose } from './Slideshow.css.js'
 
 class Poses extends Component {
   constructor(props) {
@@ -19,19 +19,17 @@ class Poses extends Component {
 
   render() {
     return (
-      <SlideshowPose>
-        <this.animationWrapper
-          className={this.props.elementClass}
-          key={this.props.image.index}
-          pose={logic(
-            this.state.animation.logic,
-            this.props.stateIndex,
-            this.props.image.index
-          )}
-        >
-          <Slide image={this.props.image} max={this.props.max} />
-        </this.animationWrapper>
-      </SlideshowPose>
+      <this.animationWrapper
+        className={this.props.elementClass}
+        key={this.props.image.index}
+        pose={logic(
+          this.state.animation.logic,
+          this.props.stateIndex,
+          this.props.image.index
+        )}
+      >
+        <Slide image={this.props.image} max={this.props.max} />
+      </this.animationWrapper>
     );
   }
 }
