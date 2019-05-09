@@ -3,7 +3,6 @@ import { render, fireEvent, cleanup, wait } from 'react-testing-library';
 import { images } from './data/slideshow';
 import Slideshow from '../Slideshow';
 import { slideAnimation } from '../animations';
-import 'jest-prop-type-error';
 
 afterEach(cleanup);
 
