@@ -33,7 +33,7 @@ class Poses extends Component {
 
 // TODO: outline shape of animation object in propTypes
 Poses.propTypes = {
-  animation: PropTypes.object,
+  animation: PropTypes.string,
   stateIndex: PropTypes.number.isRequired,
   image: PropTypes.object.isRequired,
   max: PropTypes.number.isRequired

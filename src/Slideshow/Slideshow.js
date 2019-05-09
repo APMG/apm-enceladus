@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Swipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
 import Poses from './Poses';
@@ -70,8 +71,13 @@ class Slideshow extends Component {
   };
 
   render() {
+    const classes = classNames({
+      slideshow: true,
+      [this.props.elementClass]: this.props.elementClass
+    });
+
     return (
-      <div className={`slideshow ${this.props.elementClass}`}>
+      <div className={classes}>
         <button
           data-testid="prev-button"
           className="slideshow_button"
@@ -120,7 +126,83 @@ class Slideshow extends Component {
 }
 
 Slideshow.propTypes = {
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      aspect_ratios: PropTypes.shape({
+        normal: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        }),
+        square: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        }),
+        thumbnail: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        }),
+        widescreen: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        }),
+        portrait: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        }),
+        uncropped: PropTypes.shape({
+          instances: PropTypes.arrayOf(
+            PropTypes.shape({
+              width: PropTypes.number,
+              url: PropTypes.string,
+              height: PropTypes.number
+            })
+          ),
+          slug: PropTypes.string
+        })
+      }).isRequired,
+      long_caption: PropTypes.string,
+      short_caption: PropTypes.string,
+      width: PropTypes.string,
+      preferred_aspect_ratio_slug: PropTypes.string,
+      id: PropTypes.string,
+      credit_url: PropTypes.string,
+      type: PropTypes.string,
+      float: PropTypes.string,
+      credit: PropTypes.string,
+      url: PropTypes.string,
+      srcset: PropTypes.string
+    })
+  ).isRequired,
   animation: PropTypes.oneOf(['fade', 'slide']),
   elementClass: PropTypes.string
 };
