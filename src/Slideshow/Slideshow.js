@@ -102,7 +102,6 @@ class Slideshow extends Component {
               <Poses
                 key={image.index}
                 animation={this.props.animation}
-                elementClass="slideshow_item"
                 image={image}
                 stateIndex={this.state.index}
                 max={this.state.images.length}
