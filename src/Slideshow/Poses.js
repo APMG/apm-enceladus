@@ -18,6 +18,7 @@ class Poses extends Component {
   render() {
     return (
       <this.animationWrapper
+        className="slideshow_item"
         key={this.props.image.index}
         pose={logic(
           this.state.animation.logic,

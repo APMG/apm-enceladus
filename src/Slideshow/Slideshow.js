@@ -80,7 +80,7 @@ class Slideshow extends Component {
       <div className={classes}>
         <button
           data-testid="prev-button"
-          className="slideshow_button"
+          className="slideshow_button slideshow_button-prev"
           onClick={this.prev}
         >
           <IconChevronLeft />
@@ -88,6 +88,7 @@ class Slideshow extends Component {
         </button>
 
         <Swipeable
+          className="slideshow_container"
           onSwipingLeft={this.next}
           onSwipingRight={this.prev}
           delta={100}
@@ -96,25 +97,23 @@ class Slideshow extends Component {
           stopPropagation={true}
           disabled={this.state.disabled}
         >
-          <div data-testid="slideshow" className="slideshow_container">
-            {this.getNearestImages(this.state.images, this.state.index).map(
-              (image) => (
-                <Poses
-                  key={image.index}
-                  animation={this.props.animation}
-                  elementClass="slideshow_item"
-                  image={image}
-                  stateIndex={this.state.index}
-                  max={this.state.images.length}
-                />
-              )
-            )}
-          </div>
+          {this.getNearestImages(this.state.images, this.state.index).map(
+            (image) => (
+              <Poses
+                key={image.index}
+                animation={this.props.animation}
+                elementClass="slideshow_item"
+                image={image}
+                stateIndex={this.state.index}
+                max={this.state.images.length}
+              />
+            )
+          )}
         </Swipeable>
 
         <button
           data-testid="next-button"
-          className="slideshow_button"
+          className="slideshow_button slideshow_button-next"
           onClick={this.next}
         >
           <IconChevronRight />

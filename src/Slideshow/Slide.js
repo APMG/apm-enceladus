@@ -5,7 +5,7 @@ import { Image } from 'apm-mimas';
 class Slide extends Component {
   render() {
     return (
-      <figure>
+      <figure className="slideshow_figure">
         <Image
           image={this.props.image}
           aspectRatio="widescreen"
