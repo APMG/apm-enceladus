@@ -1,7 +1,7 @@
 {
   "name": "apm-enceladus",
   "description": "A React component that takes an array of Image objects from our American Public Media's Images API and turns it into a slideshow, with some options",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "license": "MIT",
@@ -9,19 +9,19 @@
     "dist",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/APMG/apm-enceladus"
+  },
   "keywords": [
     "image",
     "react",
     "apm",
     "media"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/APMG/apm-enceladus"
-  },
   "scripts": {
-    "build": "webpack --mode production",
     "start": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "jest --watch src/",
     "test:ci": "jest src/",
     "storybook": "start-storybook -p 9001 -c .storybook",
