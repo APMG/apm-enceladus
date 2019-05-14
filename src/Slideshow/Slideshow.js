@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Swipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
 import Poses from './Poses';
 import { animationDuration } from './animations';
-import './styles.css';
 
 // Links will not work with react-swipeable. If you need to add links, we might have to consider removing the swiping capabilities. Should I try react-swipeable-views? react-easy-swipe?
 
@@ -83,20 +81,11 @@ class Slideshow extends Component {
           className="slideshow_button slideshow_button-prev"
           onClick={this.prev}
         >
-          <IconChevronLeft />
+          <IconChevronLeft elementClass="slideshow_icon" />
           <span className="invisible">Previous Slide</span>
         </button>
 
-        <Swipeable
-          className="slideshow_container"
-          onSwipingLeft={this.next}
-          onSwipingRight={this.prev}
-          delta={100}
-          trackMouse={true}
-          preventDefaultTouchmoveEvent={true}
-          stopPropagation={true}
-          disabled={this.state.disabled}
-        >
+        <div className="slideshow_container">
           {this.getNearestImages(this.state.images, this.state.index).map(
             (image) => (
               <Poses
@@ -108,14 +97,14 @@ class Slideshow extends Component {
               />
             )
           )}
-        </Swipeable>
+        </div>
 
         <button
           data-testid="next-button"
           className="slideshow_button slideshow_button-next"
           onClick={this.next}
         >
-          <IconChevronRight />
+          <IconChevronRight elementClass="slideshow_icon" />
           <span className="invisible">Next Slide</span>
         </button>
       </div>
