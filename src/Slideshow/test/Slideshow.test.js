@@ -2,7 +2,6 @@ import React from 'react';
 import { render, fireEvent, cleanup, wait } from 'react-testing-library';
 import { images } from './data/slideshow';
 import Slideshow from '../Slideshow';
-import { slideAnimation } from '../animations';
 
 afterEach(cleanup);
 
@@ -25,17 +24,20 @@ test('Renders a div with the class slideshow and a custom class when the slidesh
   expect(container.firstChild.classList).toContain('test-slideshow');
 });
 
-describe('Renders the correct number of slides (max 3)', () => {
-  it('max three', () => {
-    const { container } = render(<Slideshow images={images} />);
-    expect(container.querySelectorAll('.slideshow_item').length).toBe(3);
-  });
+test('Loads only three images (last, first and second) on launch', () => {
+  const { container, getByAltText } = render(<Slideshow images={images} />);
 
-  it('only one', () => {
-    const oneImage = images.slice(0, 1);
-    const { container } = render(<Slideshow images={oneImage} />);
-    expect(container.querySelectorAll('.slideshow_item').length).toBe(1);
-  });
+  expect(container.querySelectorAll('.slideshow_image').length).toBe(3);
+  expect(
+    getByAltText('St. Vincent performs music from her album MassEducation')
+      .length
+  ).not.toBeNull();
+  expect(
+    getByAltText('Serena Brook opens our show at The Town Hall').length
+  ).not.toBeNull();
+  expect(
+    getByAltText('Jon Batiste performs "Don\'t Stop"').length
+  ).not.toBeNull();
 });
 
 test('Next button grabs the correct set of three images', async () => {
@@ -70,7 +72,7 @@ test('Next button grabs the correct set of three images', async () => {
   });
 });
 
-test('Prev button works grabs the right set of three images', async () => {
+test('Prev button works grabs the correct set of three images', async () => {
   const { getByAltText, getByTestId, container } = render(
     <Slideshow images={images} />
   );
@@ -104,39 +106,37 @@ test('Prev button works grabs the right set of three images', async () => {
   });
 });
 
-describe('Loads the correct animation', () => {
-  it('loads fade by default', () => {
-    const { getByTestId } = render(<Slideshow images={images} />);
+test('Animation set to fade by default', () => {
+  const { container } = render(<Slideshow images={images} />);
 
-    getByTestId('slideshow').childNodes.forEach((node, i) => {
-      if (i === 1) {
-        expect(node.firstChild.getAttribute('style')).toBe('opacity: 1;');
-      } else {
-        expect(node.firstChild.getAttribute('style')).toBe('opacity: 0;');
-      }
-    });
-  });
+  let slides = container.querySelectorAll('.slideshow_item');
 
-  it('loads slide when requested', () => {
-    const { getByTestId } = render(
-      <Slideshow images={images} animation={slideAnimation} />
-    );
-
-    getByTestId('slideshow').childNodes.forEach((node, i) => {
-      if (i === 1) {
-        expect(node.firstChild.getAttribute('style')).toBe(
-          'opacity: 1; transform: none;'
-        );
-      } else {
-        expect(node.firstChild.getAttribute('style')).toBe(
-          'opacity: 0; transform: translateX(100px) translateZ(0);'
-        );
-      }
-    });
+  slides.forEach((slide, i) => {
+    if (i === 1) {
+      expect(slide.getAttribute('style')).toBe('opacity: 1;');
+    } else {
+      expect(slide.getAttribute('style')).toBe('opacity: 0;');
+    }
   });
 });
 
-// // FAILURES
+test('Slide animation is used when requested', () => {
+  const { container } = render(<Slideshow images={images} animation="slide" />);
+
+  let slides = container.querySelectorAll('.slideshow_item');
+
+  slides.forEach((slide, i) => {
+    if (i === 1) {
+      expect(slide.getAttribute('style')).toBe('opacity: 1; transform: none;');
+    } else {
+      expect(slide.getAttribute('style')).toBe(
+        'opacity: 0; transform: translateX(100px) translateZ(0);'
+      );
+    }
+  });
+});
+
+// FAILURES
 
 test('Throws an error when the images prop is not provided', () => {
   expect(() => {

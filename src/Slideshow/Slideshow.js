@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Swipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
 import Poses from './Poses';
@@ -69,48 +69,42 @@ class Slideshow extends Component {
   };
 
   render() {
+    const classes = classNames({
+      slideshow: true,
+      [this.props.elementClass]: this.props.elementClass
+    });
+
     return (
-      <div className={`slideshow ${this.props.elementClass}`}>
+      <div className={classes}>
         <button
           data-testid="prev-button"
-          className="slideshow_button"
+          className="slideshow_button slideshow_button-prev"
           onClick={this.prev}
         >
-          <IconChevronLeft />
+          <IconChevronLeft elementClass="slideshow_icon" />
           <span className="invisible">Previous Slide</span>
         </button>
 
-        <Swipeable
-          onSwipingLeft={this.next}
-          onSwipingRight={this.prev}
-          delta={100}
-          trackMouse={true}
-          preventDefaultTouchmoveEvent={true}
-          stopPropagation={true}
-          disabled={this.state.disabled}
-        >
-          <div data-testid="slideshow" className="slideshow_container">
-            {this.getNearestImages(this.state.images, this.state.index).map(
-              (image) => (
-                <Poses
-                  key={image.index}
-                  animation={this.props.animation}
-                  elementClass="slideshow_item"
-                  image={image}
-                  stateIndex={this.state.index}
-                  max={this.state.images.length}
-                />
-              )
-            )}
-          </div>
-        </Swipeable>
+        <div className="slideshow_container">
+          {this.getNearestImages(this.state.images, this.state.index).map(
+            (image) => (
+              <Poses
+                key={image.index}
+                animation={this.props.animation}
+                image={image}
+                stateIndex={this.state.index}
+                max={this.state.images.length}
+              />
+            )
+          )}
+        </div>
 
         <button
           data-testid="next-button"
-          className="slideshow_button"
+          className="slideshow_button slideshow_button-next"
           onClick={this.next}
         >
-          <IconChevronRight />
+          <IconChevronRight elementClass="slideshow_icon" />
           <span className="invisible">Next Slide</span>
         </button>
       </div>
@@ -196,13 +190,13 @@ Slideshow.propTypes = {
       srcset: PropTypes.string
     })
   ).isRequired,
-  animation: PropTypes.object,
+  animation: PropTypes.oneOf(['fade', 'slide']),
   elementClass: PropTypes.string
 };
 // The animation object is allowed to be "loose". It's just potentially too variable to test here, and if you mess it up, it shouldn't crash anything -- your animation just won't work.
 
 Slideshow.defaultProps = {
-  elementClass: ''
+  animation: 'fade'
 };
 
 export default Slideshow;

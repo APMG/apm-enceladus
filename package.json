@@ -9,19 +9,19 @@
     "dist",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/APMG/apm-enceladus"
+  },
   "keywords": [
     "image",
     "react",
     "apm",
     "media"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/APMG/apm-enceladus"
-  },
   "scripts": {
-    "build": "webpack --mode production",
     "start": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "jest --watch src/",
     "test:ci": "jest src/",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -46,10 +46,12 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "eslint": "^5.13.0",
     "eslint-config-prettier": "^4.0.0",
@@ -58,17 +60,18 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.7.1",
     "jest-prop-type-error": "^1.1.0",
+    "mini-css-extract-plugin": "^0.6.0",
     "prettier": "1.16.4",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-testing-library": "^5.8.0",
+    "uuid": "^3.3.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
     "apm-mimas": "^0.1.9",
     "husky": "^1.3.1",
-    "react-pose": "^4.0.8",
-    "react-swipeable": "^5.2.1"
+    "react-pose": "^4.0.8"
   }
 }
