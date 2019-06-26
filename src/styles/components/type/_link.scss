@@ -1,0 +1,19 @@
+//-----------------------------------------
+// Link Styles
+//-----------------------------------------
+
+.link {
+  @include link();
+}
+
+.link-plain {
+  @include link-plain();
+}
+
+.link-inverted {
+  color: $color-white;
+
+  &:hover {
+    color: $color-white;
+  }
+}

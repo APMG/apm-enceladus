@@ -1,0 +1,31 @@
+//--------------------------------------------------
+// Utility classes for accomplishing
+// basic styling on arbitrary elements
+//--------------------------------------------------
+
+.invisible {
+  @include invisible();
+}
+
+.center {
+  text-align: center;
+}
+
+.has-blur {
+  transition: filter .5s;
+
+  &.is-blur {
+    opacity: .2;
+
+    // sass-lint:disable no-vendor-prefixes, indentation
+    @supports (-webkit-filter: blur(20px)) or
+              (filter: blur(20px)) {
+      opacity: 1;
+      filter: blur(15px);
+    }
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+}

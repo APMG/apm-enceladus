@@ -1,0 +1,24 @@
+// Bulleted Lists
+
+@mixin bList() {
+  li {
+    margin-left: 3rem;
+    padding-left: 1rem;
+  }
+
+  ul {
+    margin: 1rem 0;
+  }
+
+  > li {
+    list-style: disc;
+
+    > ul > li {
+      list-style: circle;
+
+      > ul > li {
+        list-style: square;
+      }
+    }
+  }
+}

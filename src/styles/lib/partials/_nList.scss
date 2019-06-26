@@ -1,0 +1,29 @@
+// Numbered Lists
+
+@mixin nList() {
+  // sass-lint:disable nesting-depth
+  li {
+    margin-left: 3rem;
+    padding-left: 1rem;
+  }
+
+  ol {
+    margin: 1rem 0;
+  }
+
+  > li {
+    list-style: decimal;
+
+    > ol > li {
+      list-style: lower-alpha;
+
+      > ol > li {
+        list-style: lower-roman;
+
+        > ol > li {
+          list-style: decimal;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+//--------------------------------
+// Main content area
+//--------------------------------
+
+.main {
+  width: 100%;
+  max-width: $max-width;
+  padding-top: $header-height-mobile + $vertical-buffer;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1;
+  background: $color-bg;
+
+  @include media($media-tablet) {
+    padding-top: $header-height-desktop + $vertical-buffer;
+  }
+}

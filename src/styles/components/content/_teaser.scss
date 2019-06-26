@@ -1,0 +1,29 @@
+//----------------------------------------------
+// Collection Item
+//----------------------------------------------
+
+.item {
+  @include mediaObj();
+}
+
+.item_figure {
+  @include mediaObj_figure();
+  width: 30%;
+}
+
+.item_content {
+  @include mediaObj_body();
+}
+
+.item_content_header {
+  margin-bottom: 8px;
+}
+
+.item_content_meta {
+  color: $color-text-light;
+  margin-bottom: 2px;
+}
+
+.item_content_body {
+  line-height: 1.5;
+}

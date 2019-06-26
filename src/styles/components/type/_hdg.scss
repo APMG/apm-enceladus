@@ -1,0 +1,18 @@
+//----------------------------------------------
+// Headings
+//----------------------------------------------
+
+.hdg {
+  @include hdg();
+}
+
+.hdg-1 { @include hdg-1(); }
+.hdg-2 { @include hdg-2(); }
+.hdg-3 { @include hdg-3(); }
+.hdg-4 { @include hdg-4(); }
+.hdg-5 { @include hdg-5(); }
+.hdg-6 { @include hdg-6(); }
+
+.hdg-inline {
+  display: inline-block;
+}

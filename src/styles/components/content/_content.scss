@@ -1,0 +1,105 @@
+//--------------------------------------
+// Content
+//
+// This is the basic story page layout,
+// but it can appear in other content
+// types such as pages, bios, and
+// collection bodies
+//--------------------------------------
+
+.content {
+  @include clearfix();
+}
+
+.content_header {
+  margin-bottom: 4rem;
+}
+
+// For containing metadata such as author, date
+.content_meta {
+  margin: 25px 0;
+  font-size: 1.8rem;
+  font-family: $font-family-default;
+}
+
+.content_topic {
+  text-transform: uppercase;
+}
+
+.content_title {
+  @include hdg();
+  @include hdg-1();
+}
+
+.content_subtitle {
+  margin: 0;
+  font-family: $font-family-heading;
+  font-size: 1.6rem;
+}
+
+.content_byline {
+  margin-bottom: 5px;
+  color: $color-grey-20;
+
+  a {
+    @include link();
+    @include link-plain();
+  }
+}
+
+.content_date {
+  display: inline-block;
+  margin-right: 20px;
+  font-family: $font-family-copy;
+}
+
+.content_date_updated {
+  font-style: italic;
+  font-size: .8em;
+  color: $color-text-light;
+}
+
+.content_social {
+  display: inline-block;
+  color: $color-text-light;
+  fill: $color-text-light;
+
+  a {
+    vertical-align: middle;
+    transition: color $transition, fill $transition;
+
+    &:hover {
+      color: $color-red;
+      fill: $color-red;
+    }
+  }
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.content_hero {
+  margin: 0 0 50px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.content_body {
+  font-family: $font-family-serif;
+  font-size: 1.6rem;
+  line-height: 1.8;
+
+  @include media($media-small-tablet) {
+    font-size: 1.8rem;
+    line-height: 2;
+  }
+
+  > * {
+    margin-top: 1.4em;
+    margin-bottom: 1.4em;
+  }
+}

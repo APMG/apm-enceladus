@@ -1,0 +1,12 @@
+//--------------------------------------------------
+// Component mixins for horizontal rules
+//--------------------------------------------------
+
+@mixin hr() {
+  display: block;
+  border: 0;
+  margin: 60px auto;
+  width: 60%;
+  height: 1px;
+  background: $color-grey-50;
+}

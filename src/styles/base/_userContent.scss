@@ -1,0 +1,72 @@
+//----------------------------------------------
+// User content (WYSIWYG)
+//
+// Directly styles elements output from a CMS
+//----------------------------------------------
+
+// sass-lint:disable NestingDepth SelectorDepth
+.userContent {
+  > * {
+    margin-bottom: 1em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @include hdg();
+    margin: 1em 0 .5em;
+    line-height: normal;
+  }
+
+  h1 { @include hdg-1(); }
+  h2 { @include hdg-2(); }
+  h3 { @include hdg-3(); }
+  h4 { @include hdg-4(); }
+  h5 { @include hdg-5(); }
+  h6 { @include hdg-6(); }
+
+  p {
+    font-weight: normal;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  strong,
+  b {
+    font-weight: bold;
+  }
+
+  img {
+    display: inline-block;
+  }
+
+  ul {
+    @include bList();
+  }
+
+  ol {
+    @include nList();
+  }
+
+  a {
+    @include link();
+  }
+
+  blockquote {
+    @include blockquote();
+  }
+
+  hr {
+    @include hr();
+  }
+
+  iframe {
+    width: 100%;
+  }
+}

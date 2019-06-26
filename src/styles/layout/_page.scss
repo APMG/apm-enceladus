@@ -1,0 +1,10 @@
+//----------------------------------------------
+// Page - the content between the
+// header and footer
+//----------------------------------------------
+
+.page {
+  // Allows sticky footer
+  flex: 1;
+  flex-basis: auto; // IE11 bug fix
+}

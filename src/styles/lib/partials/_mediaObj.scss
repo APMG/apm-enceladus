@@ -1,0 +1,25 @@
+// Media Object
+
+@mixin mediaObj() {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  > :not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+@mixin mediaObj_figure() {
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@mixin mediaObj_body() {
+  flex-grow: 1;
+}

@@ -1,0 +1,52 @@
+//----------------------------------------------
+// Text styles
+//----------------------------------------------
+
+.text-light {
+  color: $color-text-light;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-small {
+  font-size: 1.4rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-em {
+  font-style: italic;
+}
+
+.text-sans {
+  font-family: $font-family-sans;
+}
+
+.text-serif {
+  font-family: $font-family-serif;
+}
+
+.text-white {
+  color: $color-white;
+}
+
+.text-alt {
+  line-height: 1.8;
+
+  @include media($media-small-tablet) {
+    font-size: 1.7rem;
+  }
+}
+
+.text-animate {
+  opacity: 0;
+  transition: opacity .75s ease-out;
+
+  &.fade-in {
+    opacity: 1;
+  }
+}
