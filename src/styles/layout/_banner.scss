@@ -1,0 +1,39 @@
+//----------------------------------------------
+// Banner - for taking up full screen width
+//----------------------------------------------
+
+.banner {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.banner-header {
+  box-shadow: 0 1px 10px rgba($color-black, .2);
+  max-width: none;
+  background: $color-bg;
+  position: fixed;
+  z-index: $z-header;
+}
+
+.banner-footer {
+  background-color: $color-black;
+}
+
+.banner-fill {
+  @include clearfix();
+  overflow: hidden;
+}
+
+.banner-fill-primary {
+  background-color: $color-red;
+}
+
+.banner-fill-secondary {
+  background-color: $color-grey-20;
+}

@@ -1,0 +1,15 @@
+// Media Queries
+$media-mobile: 20em;
+$media-medium-mobile: 22em;
+$media-large-mobile: 24em;
+$media-small-tablet: 32em;
+$media-st-t: 40em;
+$media-tablet: 48em;
+$media-t-d: 56em;
+$media-desktop: 64em;
+$media-large-desktop: 68em;
+$media-wide: 75em;
+
+// The point at which the nav/header switches from
+// hamburger menu to sidebar
+$media-full-layout: $media-tablet;

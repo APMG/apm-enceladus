@@ -1,0 +1,49 @@
+// Columns
+
+$_content-gutter-default: 10px;
+$_content-gutter-small-tablet: 20px;
+$_content-gutter-tablet: 12.5%;
+$_content-gutter-desktop: 16.667%;
+
+$_page-gutter-default: $_content-gutter-default;
+$_page-gutter-small-tablet: $_content-gutter-small-tablet;
+$_page-gutter-tablet: 6%;
+$_page-gutter-desktop: 10%;
+
+@mixin col() {
+  @include clearfix();
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin col-content() {
+  margin: 0 $_content-gutter-default;
+
+  @include media($media-small-tablet) {
+    margin: 0 $_content-gutter-small-tablet;
+  }
+
+  @include media($media-tablet) {
+    margin: 0 $_content-gutter-tablet;
+  }
+
+  @include media($media-desktop) {
+    margin: 0 $_content-gutter-desktop;
+  }
+}
+
+@mixin col-page() {
+  margin: 0 $_page-gutter-default;
+
+  @include media($media-small-tablet) {
+    margin: 0 $_page-gutter-small-tablet;
+  }
+
+  @include media($media-tablet) {
+    margin: 0 $_page-gutter-tablet;
+  }
+
+  @include media($media-desktop) {
+    margin: 0 $_page-gutter-desktop;
+  }
+}

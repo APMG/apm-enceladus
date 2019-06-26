@@ -1,0 +1,14 @@
+//--------------------------------------
+// Columns
+//
+// Constrains the width of content to
+// the site maximum, includes edge
+// padding at smaller sizes.
+//--------------------------------------
+
+.container {
+  margin: 0 auto;
+  max-width: $max-width + ($container-edge * 2);
+  padding: 0 $container-edge;
+  position: relative;
+}

@@ -1,0 +1,28 @@
+//--------------------------------------------
+// Component mixins for links
+//--------------------------------------------
+
+@mixin link() {
+  color: $color-link;
+  fill: $color-link;
+  text-decoration: underline;
+  transition: color $transition, fill $transition;
+
+  &:hover {
+    color: $color-link-hover;
+    fill: $color-link-hover;
+  }
+
+  svg {
+    vertical-align: -2px;
+  }
+}
+
+@mixin link-plain() {
+  text-decoration: none;
+  background-color: transparent;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

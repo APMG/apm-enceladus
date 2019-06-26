@@ -1,0 +1,13 @@
+// Font Families
+$font-family-sans: 'Montserrat', sans-serif;
+$font-family-serif: 'Trocchi', Georgia, serif;
+
+$font-family-main: $font-family-sans;
+$font-family-heading: $font-family-sans;
+$font-family-copy: $font-family-serif;
+
+$font-family-default: $font-family-main;
+
+// Font Sizes
+$font-size-root: 62.5%; // Root size, only for html tag. // 62.5% means that 1rem = 10px
+$font-size-default: 1.6rem;

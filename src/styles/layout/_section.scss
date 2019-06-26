@@ -1,0 +1,32 @@
+//----------------------------------------------
+// Section - for vertical spacing
+//----------------------------------------------
+
+.section {
+  margin-bottom: 40px;
+
+  @include media($media-tablet) {
+    margin-bottom: 60px;
+  }
+}
+
+.section-md {
+  margin-bottom: 20px;
+
+  @include media($media-tablet) {
+    margin-bottom: 40px;
+  }
+}
+
+.section-sm {
+  margin-bottom: 8px;
+
+  @include media($media-tablet) {
+    margin-bottom: 20px;
+  }
+}
+
+.section-page {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}

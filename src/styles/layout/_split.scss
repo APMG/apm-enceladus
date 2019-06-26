@@ -1,0 +1,30 @@
+//----------------------------------------------
+// Split
+//
+// Aligns content left or right. Uses the
+// parent `.split` container for table-layout
+//----------------------------------------------
+
+.split {
+  display: table;
+  width: 100%;
+
+  > * {
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.split-center {
+  > * {
+    vertical-align: middle;
+  }
+}
+
+.split_first {
+  text-align: left;
+}
+
+.split_last {
+  text-align: right;
+}

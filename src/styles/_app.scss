@@ -1,0 +1,95 @@
+//--------------------------------------------------
+// Main SCSS Directory
+//
+// This is where all scss and css files are imported
+//--------------------------------------------------
+
+// Vendor
+// Imported libraries, etc.
+@import 'vendor/slick';
+
+// Library
+// Sass variables, functions, mixins, etc. for use in other files.
+// NO CSS should be directly output by these files
+@import 'lib/vars/animation';
+@import 'lib/vars/colors';
+@import 'lib/vars/layout';
+@import 'lib/vars/mq';
+@import 'lib/vars/typography';
+@import 'lib/vars/z_index';
+
+@import 'lib/mixins/mixins';
+
+@import 'lib/partials/bList';
+@import 'lib/partials/blockquote';
+@import 'lib/partials/col';
+@import 'lib/partials/figure';
+@import 'lib/partials/hdg';
+@import 'lib/partials/hr';
+@import 'lib/partials/link';
+@import 'lib/partials/mediaObj';
+@import 'lib/partials/nList';
+
+// Base
+// General-purpose css, such as default element styles, fonts, resets
+@import 'base/fonts';
+@import 'base/normalize';
+@import 'base/elements';
+@import 'base/util';
+@import 'base/userContent';
+
+// Layout
+// Components used for sizing and containment, such as grid systems and columns
+// Should apply mostly to overall page structure, not inner content
+@import 'layout/banner';
+@import 'layout/col';
+@import 'layout/container';
+@import 'layout/main';
+@import 'layout/page';
+@import 'layout/row';
+@import 'layout/section';
+@import 'layout/split';
+
+// Components
+// Discrete interface components that can be used anywhere on the site and look the same
+@import 'components/content/content';
+@import 'components/content/teaser';
+@import 'components/content/slideshow';
+// @import 'components/event/event';
+// @import 'components/forms/field';
+// @import 'components/lists/bList';
+// @import 'components/lists/hList';
+// @import 'components/lists/nList';
+// @import 'components/lists/vList';
+// @import 'components/structure/aspect';
+// @import 'components/structure/blocks';
+// @import 'components/structure/figure';
+// @import 'components/structure/media';
+// @import 'components/structure/mod';
+@import 'components/type/blockquote';
+@import 'components/type/hdg';
+@import 'components/type/hr';
+@import 'components/type/link';
+@import 'components/type/text';
+@import 'components/ui/btn';
+@import 'components/ui/icon';
+@import 'components/ui/pagination';
+@import 'components/ui/player';
+@import 'components/ui/socialLink';
+@import 'components/ui/spinner';
+
+// Pages
+// Styling for specific pages/templates
+// @import 'templates/collection';
+// @import 'templates/story';
+
+// Landmarks
+// Elements that exist on every page (The main header and footer, etc.)
+// @import 'landmarks/footer';
+// @import 'landmarks/header';
+// @import 'landmarks/nav';
+// @import 'landmarks/navIcon';
+
+// Overrides
+// Styles to override plugins and conflicting styles. Only use these if it's really really necessary.
+// @import 'overrides/**/*';

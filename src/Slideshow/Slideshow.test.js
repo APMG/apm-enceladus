@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, cleanup, wait } from 'react-testing-library';
-import { images } from './data/slideshow';
-import Slideshow from '../Slideshow';
+import { images } from './fixtures/slideshow';
+import Slideshow from './Slideshow';
 
 afterEach(cleanup);
 

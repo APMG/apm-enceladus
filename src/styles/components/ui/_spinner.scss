@@ -1,0 +1,36 @@
+//----------------------------------------------
+// Loading Spinner
+//----------------------------------------------
+
+$_spinner-radius: 15px;
+$_spinner-border-width: 5px;
+$_spinner-frequency: 1s;
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner {
+  position: relative;
+  height: 100%;
+  margin: ($_spinner-radius * 6) 0;
+  min-height: $_spinner-radius * 2;
+  width: 100%;
+
+  &::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $_spinner-radius * 2;
+    height: $_spinner-radius * 2;
+    margin-top: -($_spinner-radius);
+    margin-left: -($_spinner-radius);
+    border-radius: 50%;
+    border: $_spinner-border-width solid transparent;
+    border-top-color: $color-theme;
+    border-bottom-color: $color-theme;
+    animation: spinner $_spinner-frequency linear infinite;
+  }
+}

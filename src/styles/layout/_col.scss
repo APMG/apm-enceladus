@@ -1,0 +1,15 @@
+//--------------------------------------
+// Columns
+//--------------------------------------
+
+.col {
+  @include col();
+}
+
+.col-content {
+  @include col-content();
+}
+
+.col-page {
+  @include col-page();
+}
