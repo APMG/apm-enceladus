@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'apm-mimas';
-import Slidecredit from './Slidecredit';
+import SlideCredit from './SlideCredit';
 
 class Slide extends Component {
   render() {
@@ -14,7 +14,7 @@ class Slide extends Component {
         />
         <figcaption className="slideshow_caption">
           <div className="slideshow_credit">
-            <Slidecredit
+            <SlideCredit
               creditName={this.props.image.credit.name}
               creditLink={this.props.image.credit.url}
             />

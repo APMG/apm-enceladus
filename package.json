@@ -1,9 +1,8 @@
 {
   "name": "@apmg/enceladus",
   "description": "A React component that takes an array of Image objects from our American Public Media's Images API and turns it into a slideshow, with some options",
-  "version": "0.2.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "version": "0.2.2",
+  "main": "dist/bundle.js",
   "license": "MIT",
   "files": [
     "dist",
@@ -50,7 +49,8 @@
     "classnames": "^2.2.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "next": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -93,6 +93,7 @@
   "dependencies": {
     "apm-mimas": "^0.1.9",
     "husky": "^1.3.1",
+    "next": "^9.0.0",
     "react-pose": "^4.0.8"
   }
 }
