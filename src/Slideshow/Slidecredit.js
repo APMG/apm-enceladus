@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 
 const SlideCredit = (props) => {
-  const { creditName, creditUrl } = props;
-  {
-    if (creditName && creditUrl)
-      return (
-        <Link href={creditUrl}>
-          <a className="slideshow_creditlink">{creditName}</a>
+  const { name, url } = props;
+
+  if (url) {
+    return (
+      <div className={url}>
+        <Link href={url}>
+          <a className="slideshow_creditlink">{name}</a>
         </Link>
-      );
+      </div>
+    );
   }
-  if (creditName) return <div>{creditName}</div>;
+  if (name) return <div className="creditOnly">{name}</div>;
 };
 
 SlideCredit.propTypes = {

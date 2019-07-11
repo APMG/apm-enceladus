@@ -2,39 +2,70 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'apm-mimas';
 import Slidecredit from './Slidecredit';
+import IconChevronRight from './svg/IconChevronRight';
+import IconChevronLeft from './svg/IconChevronLeft';
 
 class Slide extends Component {
   render() {
+    const { image, max, next, prev } = this.props;
+    const { credit, long_caption } = image;
+    const { name, url } = credit;
     return (
-      <figure className="slideshow_figure">
-        <Image
-          image={this.props.image}
-          aspectRatio="widescreen"
-          elementClass="slideshow_image"
-        />
-        <figcaption className="slideshow_caption">
-          <div className="slideshow_credit">
-            <Slidecredit
-              creditName={this.props.image.credit.name}
-              creditLink={this.props.image.credit.url}
-            />
-          </div>
-          {this.props.image.long_caption}
+      <>
+        <figure className="slideshow_figure">
+          <button
+            data-testid="prev-button"
+            className="slideshow_button slideshow_button-prev"
+            onClick={(e) => prev(e, this.prev)}
+          >
+            <IconChevronLeft elementClass="slideshow_icon" />
+            <span className="invisible">Previous Slide</span>
+          </button>
+          <Image
+            image={image}
+            aspectRatio="widescreen"
+            elementClass="slideshow_image"
+          />
 
-          <br />
-          <em>
-            ({this.props.image.index + 1} of {this.props.max})
-          </em>
-        </figcaption>
-      </figure>
+          <button
+            data-testid="next-button"
+            className="slideshow_button slideshow_button-next"
+            onClick={(e) => next(e, this.next)}
+          >
+            <IconChevronRight elementClass="slideshow_icon" />
+            <span className="invisible">Next Slide</span>
+          </button>
+          <figcaption className="slideshow_caption">
+            {name && url && (
+              <div className="slideshow_credit">
+                <Slidecredit name={name} url={url} />
+              </div>
+            )}
+            {long_caption}
+            <br />
+            <em>
+              ({image.index + 1} of {max})
+            </em>
+          </figcaption>
+        </figure>
+      </>
     );
   }
 }
 
 Slide.propTypes = {
-  image: PropTypes.object,
+  image: PropTypes.shape({
+    credit: PropTypes.shape({
+      credit: PropTypes.string,
+      name: PropTypes.string,
+      url: PropTypes.string
+    }),
+    long_caption: PropTypes.string,
+    index: PropTypes.number
+  }),
   max: PropTypes.number.isRequired,
-  credit: PropTypes.any
+  prev: PropTypes.func,
+  next: PropTypes.func
 };
 
 export default Slide;

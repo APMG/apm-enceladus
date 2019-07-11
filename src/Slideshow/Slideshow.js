@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import IconChevronRight from './svg/IconChevronRight';
-import IconChevronLeft from './svg/IconChevronLeft';
 import Poses from './Poses';
 import { animationDuration } from './animations';
 
@@ -76,15 +74,6 @@ class Slideshow extends Component {
 
     return (
       <div className={classes}>
-        <button
-          data-testid="prev-button"
-          className="slideshow_button slideshow_button-prev"
-          onClick={this.prev}
-        >
-          <IconChevronLeft elementClass="slideshow_icon" />
-          <span className="invisible">Previous Slide</span>
-        </button>
-
         <div className="slideshow_container">
           {this.getNearestImages(this.state.images, this.state.index).map(
             (image) => (
@@ -94,19 +83,12 @@ class Slideshow extends Component {
                 image={image}
                 stateIndex={this.state.index}
                 max={this.state.images.length}
+                prev={this.prev}
+                next={this.next}
               />
             )
           )}
         </div>
-
-        <button
-          data-testid="next-button"
-          className="slideshow_button slideshow_button-next"
-          onClick={this.next}
-        >
-          <IconChevronRight elementClass="slideshow_icon" />
-          <span className="invisible">Next Slide</span>
-        </button>
       </div>
     );
   }
@@ -185,7 +167,7 @@ Slideshow.propTypes = {
       credit_url: PropTypes.string,
       type: PropTypes.string,
       float: PropTypes.string,
-      credit: PropTypes.string,
+      credit: PropTypes.object,
       url: PropTypes.string,
       srcset: PropTypes.string
     })

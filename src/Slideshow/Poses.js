@@ -26,7 +26,12 @@ class Poses extends Component {
           this.props.image.index
         )}
       >
-        <Slide image={this.props.image} max={this.props.max} />
+        <Slide
+          image={this.props.image}
+          max={this.props.max}
+          prev={this.props.prev}
+          next={this.props.next}
+        />
       </this.animationWrapper>
     );
   }
@@ -37,7 +42,9 @@ Poses.propTypes = {
   animation: PropTypes.string,
   stateIndex: PropTypes.number.isRequired,
   image: PropTypes.object.isRequired,
-  max: PropTypes.number.isRequired
+  max: PropTypes.number.isRequired,
+  prev: PropTypes.func,
+  next: PropTypes.func
 };
 
 export default Poses;
