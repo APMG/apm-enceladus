@@ -36,7 +36,7 @@ class Slide extends Component {
             <span className="invisible">Next Slide</span>
           </button>
           <figcaption className="slideshow_caption">
-            {name && url && (
+            {name && (
               <div className="slideshow_credit">
                 <Slidecredit name={name} url={url} />
               </div>
@@ -56,7 +56,6 @@ class Slide extends Component {
 Slide.propTypes = {
   image: PropTypes.shape({
     credit: PropTypes.shape({
-      credit: PropTypes.string,
       name: PropTypes.string,
       url: PropTypes.string
     }),
