@@ -1,7 +1,7 @@
 {
   "name": "@apmg/enceladus",
   "description": "A React component that takes an array of Image objects from our American Public Media's Images API and turns it into a slideshow, with some options",
-  "version": "0.3.0-beta.1",
+  "version": "0.3.0-beta.3",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "license": "MIT",
@@ -51,7 +51,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "prop-types": "^15.7.2",
-    "next": "^9.0.0"
+    "next": "8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
