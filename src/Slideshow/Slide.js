@@ -13,12 +13,14 @@ class Slide extends Component {
           elementClass="slideshow_image"
         />
         <figcaption className="slideshow_caption">
-          <div className="slideshow_credit">
-            <SlideCredit
-              creditName={this.props.image.credit.name}
-              creditLink={this.props.image.credit.url}
-            />
-          </div>
+          {this.props.image.credit && (
+            <div className="slideshow_credit">
+              <SlideCredit
+                name={this.props.image.credit}
+                url={this.props.image.credit_url}
+              />
+            </div>
+          )}
           {this.props.image.long_caption}
 
           <br />
