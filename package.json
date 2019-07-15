@@ -1,7 +1,7 @@
 {
   "name": "@apmg/enceladus",
   "description": "A React component that takes an array of Image objects from our American Public Media's Images API and turns it into a slideshow, with some options",
-  "version": "0.3.0-beta.9",
+  "version": "0.3.0-beta.10",
   "main": "dist/bundle.js",
   "license": "MIT",
   "files": [
@@ -49,10 +49,10 @@
     "classnames": "^2.2.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "prop-types": "^15.7.2",
-    "next": "^9.0.0"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
+    "@apmg/mimas": "^0.3.0",
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.3.1",
@@ -71,9 +71,11 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "husky": "^1.3.1",
     "jest": "^24.7.1",
     "jest-prop-type-error": "^1.1.0",
     "mini-css-extract-plugin": "^0.6.0",
+    "next": "^9.0.0",
     "node-sass": "^4.12.0",
     "prettier": "1.16.4",
     "prop-types": "^15.7.2",
@@ -91,9 +93,6 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "apm-mimas": "^0.1.9",
-    "husky": "^1.3.1",
-    "next": "^9.0.0",
     "react-pose": "^4.0.8"
   }
 }
