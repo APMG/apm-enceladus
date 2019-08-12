@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
+import IconFullscreen from './svg/IconFullscreen';
 import Poses from './Poses';
 import { animationDuration } from './animations';
 
@@ -22,7 +23,9 @@ class Slideshow extends Component {
     this.state = {
       index: 0,
       images: images,
-      disabled: false
+      disabled: false,
+      //add isZoom
+      isZoom: false
     };
   }
 
@@ -68,6 +71,14 @@ class Slideshow extends Component {
     }, animationDuration);
   };
 
+  fullscreen = () => {
+    /* eslint no-console:0 */
+    console.log('in full screenmode', this.state.isZoom);
+    this.setState({
+      isZoom: !this.state.isZoom
+    });
+  };
+
   render() {
     const classes = classNames({
       slideshow: true,
@@ -76,6 +87,14 @@ class Slideshow extends Component {
 
     return (
       <div className={classes}>
+        <button
+          data-testid="fullscreen-button"
+          className="slideshow_fullscreen"
+          onClick={this.fullscreen}
+        >
+          <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+          <span className="invisible">Fullscreen Slide</span>
+        </button>
         <button
           data-testid="prev-button"
           className="slideshow_button slideshow_button-prev"

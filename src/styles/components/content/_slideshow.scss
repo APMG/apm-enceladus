@@ -14,6 +14,8 @@ $_button-icon-size-mobile: 15px;
   width: 100%;
 }
 
+
+
 .slideshow_button {
   @include reset-button();
   height: $_button-size;
@@ -42,6 +44,18 @@ $_button-icon-size-mobile: 15px;
 .slideshow_button-left {
   grid-row: 1;
   grid-column: 1;
+}
+
+.slideshow_fullscreen {
+  @include reset-button();
+  z-index: $z-slideshow-button;
+  position: relative;
+  top: 1px;
+}
+
+.slideshow_icon {
+  fill: $color-white;
+  z-index: $z-slideshow-button;
 }
 
 .slideshow_container {
