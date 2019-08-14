@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
 import IconFullscreen from './svg/IconFullscreen';
+import IconShrink from './svg/IconShrink';
 import Poses from './Poses';
 import { animationDuration } from './animations';
 
@@ -12,7 +13,8 @@ import { animationDuration } from './animations';
 class Slideshow extends Component {
   constructor(props) {
     super(props);
-
+    this.fullscreenRef = React.createRef();
+    this.slideshowRef = React.createRef();
     let images = props.images;
 
     // Adds an index property to each image
@@ -29,6 +31,30 @@ class Slideshow extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('keydown', (e) => {
+      // console.log('ADD keydown listener event', e.target);
+
+      // const slideshowElement = document.querySelector('.slideshow.fullscreen');
+      if (!this.state.isZoom) {
+        if (e.keyCode === 13) {
+          console.log('keycode === 13', this.slideshowRef);
+          const slideshowElement = this.slideshowRef.current;
+          if (slideshowElement) {
+            slideshowElement.focus();
+          }
+          // document.getElementById('slideshow').focus();
+          // slideshowElement.focus();
+        }
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', (e) => {
+      console.log('REMOVE keydown listener event', e.target);
+    });
+  }
   prevIndex(i) {
     return i > 0 ? i - 1 : this.state.images.length - 1;
   }
@@ -72,11 +98,49 @@ class Slideshow extends Component {
   };
 
   fullscreen = () => {
+    const body = document.body;
     /* eslint no-console:0 */
-    console.log('in full screenmode', this.state.isZoom);
+    // console.log('in full screenmode', !this.state.isZoom);
+    const slideshowElement = this.slideshowRef.current;
+    if (!this.state.isZoom) {
+      // this.fullscreenRef.current.focus();
+      // this.slideshowRef.focus();
+
+      if (slideshowElement) {
+        body.setAttribute('tabindex', '-1');
+        slideshowElement.setAttribute('tabindex', '0');
+        slideshowElement.focus();
+      }
+      body.style.height = '100vh';
+      body.style.overflowY = 'hidden';
+      // console.log('fullscreenRef current focus func', this.fullscreenRef);
+    }
+    if (this.state.isZoom) {
+      // this.fullscreenRef.current.focus();
+      this.fullscreenRef.current.focus();
+      body.setAttribute('tabindex', '-1');
+      slideshowElement.setAttribute('tabindex', '0');
+      slideshowElement.focus();
+      // console.log('no is Zoom');
+      body.style.height = '100%';
+      body.style.overflowY = 'visible';
+    }
     this.setState({
       isZoom: !this.state.isZoom
     });
+  };
+
+  wrapKeyHandler = (event) => {
+    if (event.keyCode === 27 && this.state.isZoom) {
+      // escape key
+      this.setState({
+        isZoom: !this.state.isZoom
+      });
+      if (!this.state.isZoom) {
+        // this.fullscreenRef.current.focus();
+        this.slideshowRef;
+      }
+    }
   };
 
   render() {
@@ -86,47 +150,89 @@ class Slideshow extends Component {
     });
 
     return (
-      <div className={classes}>
-        <button
-          data-testid="fullscreen-button"
-          className="slideshow_fullscreen"
-          onClick={this.fullscreen}
+      <>
+        <div
+          id="slideshow"
+          className={`${this.state.isZoom ? classes + ' fullscreen' : classes}`}
+          ref={this.slideshowRef}
         >
-          <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
-          <span className="invisible">Fullscreen Slide</span>
-        </button>
-        <button
-          data-testid="prev-button"
-          className="slideshow_button slideshow_button-prev"
-          onClick={this.prev}
-        >
-          <IconChevronLeft elementClass="slideshow_icon" />
-          <span className="invisible">Previous Slide</span>
-        </button>
-
-        <div className="slideshow_container">
-          {this.getNearestImages(this.state.images, this.state.index).map(
-            (image) => (
-              <Poses
-                key={image.index}
-                animation={this.props.animation}
-                image={image}
-                stateIndex={this.state.index}
-                max={this.state.images.length}
-              />
-            )
-          )}
+          <button
+            aria-haspopup="true"
+            aria-label="fullscreen slideshow"
+            data-testid="fullscreen-button"
+            className="slideshow_fullscreen"
+            onClick={this.fullscreen}
+            blur={() => {
+              this.fullscreenRef.focus();
+            }}
+          >
+            {!this.state.isZoom && (
+              <>
+                <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+                <span className="invisible">Fullscreen Slide</span>
+              </>
+            )}
+            {this.state.isZoom && (
+              <>
+                <IconShrink
+                  elementClass="slideshow_icon slideshow_icon-shrink"
+                  aria-label="close"
+                />
+                <span className="invisible">Shrink Slide</span>
+              </>
+            )}
+          </button>
+          <button
+            data-testid="prev-button"
+            aria-label="Icon Chevron Left"
+            className="slideshow_button slideshow_button-prev"
+            onClick={this.prev}
+          >
+            <IconChevronLeft elementClass="slideshow_icon" />
+            <span className="invisible">Previous Slide</span>
+          </button>
+          <>
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <div
+              className={`${
+                this.state.isZoom
+                  ? 'slideshow_container fullscreen'
+                  : 'slideshow_container'
+              }`}
+              aria-modal={this.state.isZoom}
+              aria-haspopup="true"
+              role="dialog"
+              onClick={this.fullscreen}
+              blur={() => {
+                this.fullscreenRef.focus();
+              }}
+              onKeyUp={this.wrapKeyHandler}
+              ref={this.fullscreenRef}
+            >
+              {this.getNearestImages(this.state.images, this.state.index).map(
+                (image) => (
+                  <Poses
+                    key={image.index}
+                    animation={this.props.animation}
+                    image={image}
+                    stateIndex={this.state.index}
+                    max={this.state.images.length}
+                  />
+                )
+              )}
+            </div>
+          </>
+          <button
+            data-testid="next-button"
+            aria-label="Icon Chevron Right"
+            className="slideshow_button slideshow_button-next"
+            onClick={this.next}
+          >
+            <IconChevronRight elementClass="slideshow_icon" />
+            <span className="invisible">Next Slide</span>
+          </button>
         </div>
-
-        <button
-          data-testid="next-button"
-          className="slideshow_button slideshow_button-next"
-          onClick={this.next}
-        >
-          <IconChevronRight elementClass="slideshow_icon" />
-          <span className="invisible">Next Slide</span>
-        </button>
-      </div>
+      </>
     );
   }
 }
