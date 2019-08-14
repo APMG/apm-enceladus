@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
+import IconFullscreen from './svg/IconFullscreen';
+import IconShrink from './svg/IconShrink';
 import Poses from './Poses';
 import { animationDuration } from './animations';
+import FocusTrap from 'focus-trap-react';
 
 // Links will not work with react-swipeable. If you need to add links, we might have to consider removing the swiping capabilities. Should I try react-swipeable-views? react-easy-swipe?
 
 class Slideshow extends Component {
   constructor(props) {
     super(props);
-
+    this.fullscreenRef = React.createRef();
+    this.slideshowRef = React.createRef();
     let images = props.images;
 
     // Adds an index property to each image
@@ -22,7 +26,9 @@ class Slideshow extends Component {
     this.state = {
       index: 0,
       images: images,
-      disabled: false
+      disabled: false,
+      isZoom: false,
+      activeTrap: false
     };
   }
 
@@ -68,6 +74,26 @@ class Slideshow extends Component {
     }, animationDuration);
   };
 
+  fullscreen = () => {
+    const body = document.body;
+    const slideshowElement = this.slideshowRef.current;
+    if (!this.state.isZoom) {
+      if (slideshowElement) {
+        slideshowElement.current.focus();
+      }
+      body.style.height = '100vh';
+      body.style.overflowY = 'hidden';
+    }
+    if (this.state.isZoom) {
+      body.style.height = '100%';
+      body.style.overflowY = 'visible';
+    }
+    this.setState({
+      isZoom: !this.state.isZoom,
+      activeTrap: !this.state.activeTrap
+    });
+  };
+
   render() {
     const classes = classNames({
       slideshow: true,
@@ -75,39 +101,88 @@ class Slideshow extends Component {
     });
 
     return (
-      <div className={classes}>
-        <button
-          data-testid="prev-button"
-          className="slideshow_button slideshow_button-prev"
-          onClick={this.prev}
+      <FocusTrap>
+        <div
+          id="slideshow"
+          data-testid="slideshow"
+          className={`${this.state.isZoom ? classes + ' fullscreen' : classes}`}
+          ref={this.slideshowRef}
         >
-          <IconChevronLeft elementClass="slideshow_icon" />
-          <span className="invisible">Previous Slide</span>
-        </button>
-
-        <div className="slideshow_container">
-          {this.getNearestImages(this.state.images, this.state.index).map(
-            (image) => (
-              <Poses
-                key={image.index}
-                animation={this.props.animation}
-                image={image}
-                stateIndex={this.state.index}
-                max={this.state.images.length}
-              />
-            )
-          )}
+          <button
+            aria-haspopup="true"
+            aria-label="fullscreen slideshow"
+            data-testid="fullscreen-button"
+            className="slideshow_fullscreen"
+            onClick={this.fullscreen}
+            ref={this.fullscreenRef}
+          >
+            {!this.state.isZoom && (
+              <>
+                <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+                <span className="invisible" data-testid="icon-fullscreen">
+                  Fullscreen Slide
+                </span>
+              </>
+            )}
+            {this.state.isZoom && (
+              <>
+                <IconShrink
+                  elementClass="slideshow_icon slideshow_icon-shrink"
+                  aria-label="close"
+                />
+                <span className="invisible" data-testid="icon-shrink">
+                  Shrink Slide
+                </span>
+              </>
+            )}
+          </button>
+          <button
+            data-testid="prev-button"
+            aria-label="Icon Chevron Left"
+            className="slideshow_button slideshow_button-prev"
+            onClick={this.prev}
+          >
+            <IconChevronLeft elementClass="slideshow_icon" />
+            <span className="invisible">Previous Slide</span>
+          </button>
+          <>
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <div
+              className={`${
+                this.state.isZoom
+                  ? 'slideshow_container fullscreen'
+                  : 'slideshow_container'
+              }`}
+              aria-modal={this.state.isZoom}
+              aria-haspopup="true"
+              role="dialog"
+              onClick={this.fullscreen}
+              onKeyUp={this.wrapKeyHandler}
+            >
+              {this.getNearestImages(this.state.images, this.state.index).map(
+                (image) => (
+                  <Poses
+                    key={image.index}
+                    animation={this.props.animation}
+                    image={image}
+                    stateIndex={this.state.index}
+                    max={this.state.images.length}
+                  />
+                )
+              )}
+            </div>
+          </>
+          <button
+            data-testid="next-button"
+            aria-label="Icon Chevron Right"
+            className="slideshow_button slideshow_button-next"
+            onClick={this.next}
+          >
+            <IconChevronRight elementClass="slideshow_icon" />
+            <span className="invisible">Next Slide</span>
+          </button>
         </div>
-
-        <button
-          data-testid="next-button"
-          className="slideshow_button slideshow_button-next"
-          onClick={this.next}
-        >
-          <IconChevronRight elementClass="slideshow_icon" />
-          <span className="invisible">Next Slide</span>
-        </button>
-      </div>
+      </FocusTrap>
     );
   }
 }

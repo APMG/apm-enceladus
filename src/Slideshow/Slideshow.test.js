@@ -136,6 +136,35 @@ test('Slide animation is used when requested', () => {
   });
 });
 
+test('Slideshow becomes fullscreen when fullscreen button clicked', () => {
+  const { getByTestId, container } = render(<Slideshow images={images} />);
+  const buttonFullScreenToggle = getByTestId('fullscreen-button');
+  const slideshow = getByTestId('slideshow');
+  const bodyElement = document.querySelector('body');
+  expect(container.firstChild.classList.contains('fullscreen')).toBe(false);
+  fireEvent.click(buttonFullScreenToggle);
+  expect(container.firstChild.classList.contains('fullscreen')).toBe(true);
+  expect(bodyElement.getAttribute('style')).toBe(
+    'height: 100vh; overflow-y: hidden;'
+  );
+  expect(slideshow);
+  fireEvent.click(buttonFullScreenToggle);
+  expect(bodyElement.getAttribute('style')).toBe(
+    'height: 100%; overflow-y: visible;'
+  );
+});
+
+test('Slideshow shows correct button', () => {
+  const { getByTestId, queryByText } = render(<Slideshow images={images} />);
+  const buttonFullScreenToggle = getByTestId('fullscreen-button');
+
+  expect(queryByText('Shrink Slide')).toBeNull();
+  expect(queryByText('Fullscreen Slide')).not.toBeNull();
+  fireEvent.click(buttonFullScreenToggle);
+  expect(queryByText('Shrink Slide')).not.toBeNull();
+  expect(queryByText('Fullscreen Slide')).toBeNull();
+});
+
 // FAILURES
 
 test('Throws an error when the images prop is not provided', () => {
