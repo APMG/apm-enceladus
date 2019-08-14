@@ -94,16 +94,6 @@ class Slideshow extends Component {
     });
   };
 
-  wrapKeyHandler = (event) => {
-    if (event.keyCode === 27 && this.state.isZoom) {
-      // escape key
-      this.setState({
-        isZoom: !this.state.isZoom,
-        activeTrap: !this.state.activeTrap
-      });
-    }
-  };
-
   render() {
     const classes = classNames({
       slideshow: true,
