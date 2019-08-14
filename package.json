@@ -95,6 +95,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "focus-trap-react": "^6.0.0",
     "react-pose": "^4.0.8"
   }
 }

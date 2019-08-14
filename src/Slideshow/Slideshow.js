@@ -7,6 +7,7 @@ import IconFullscreen from './svg/IconFullscreen';
 import IconShrink from './svg/IconShrink';
 import Poses from './Poses';
 import { animationDuration } from './animations';
+import FocusTrap from 'focus-trap-react';
 
 // Links will not work with react-swipeable. If you need to add links, we might have to consider removing the swiping capabilities. Should I try react-swipeable-views? react-easy-swipe?
 
@@ -26,35 +27,11 @@ class Slideshow extends Component {
       index: 0,
       images: images,
       disabled: false,
-      //add isZoom
-      isZoom: false
+      isZoom: false,
+      activeTrap: false
     };
   }
 
-  componentDidMount() {
-    window.addEventListener('keydown', (e) => {
-      // console.log('ADD keydown listener event', e.target);
-
-      // const slideshowElement = document.querySelector('.slideshow.fullscreen');
-      if (!this.state.isZoom) {
-        if (e.keyCode === 13) {
-          console.log('keycode === 13', this.slideshowRef);
-          const slideshowElement = this.slideshowRef.current;
-          if (slideshowElement) {
-            slideshowElement.focus();
-          }
-          // document.getElementById('slideshow').focus();
-          // slideshowElement.focus();
-        }
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', (e) => {
-      console.log('REMOVE keydown listener event', e.target);
-    });
-  }
   prevIndex(i) {
     return i > 0 ? i - 1 : this.state.images.length - 1;
   }
@@ -99,34 +76,21 @@ class Slideshow extends Component {
 
   fullscreen = () => {
     const body = document.body;
-    /* eslint no-console:0 */
-    // console.log('in full screenmode', !this.state.isZoom);
     const slideshowElement = this.slideshowRef.current;
     if (!this.state.isZoom) {
-      // this.fullscreenRef.current.focus();
-      // this.slideshowRef.focus();
-
       if (slideshowElement) {
-        body.setAttribute('tabindex', '-1');
-        slideshowElement.setAttribute('tabindex', '0');
-        slideshowElement.focus();
+        slideshowElement.current.focus();
       }
       body.style.height = '100vh';
       body.style.overflowY = 'hidden';
-      // console.log('fullscreenRef current focus func', this.fullscreenRef);
     }
     if (this.state.isZoom) {
-      // this.fullscreenRef.current.focus();
-      this.fullscreenRef.current.focus();
-      body.setAttribute('tabindex', '-1');
-      slideshowElement.setAttribute('tabindex', '0');
-      slideshowElement.focus();
-      // console.log('no is Zoom');
       body.style.height = '100%';
       body.style.overflowY = 'visible';
     }
     this.setState({
-      isZoom: !this.state.isZoom
+      isZoom: !this.state.isZoom,
+      activeTrap: !this.state.activeTrap
     });
   };
 
@@ -134,12 +98,9 @@ class Slideshow extends Component {
     if (event.keyCode === 27 && this.state.isZoom) {
       // escape key
       this.setState({
-        isZoom: !this.state.isZoom
+        isZoom: !this.state.isZoom,
+        activeTrap: !this.state.activeTrap
       });
-      if (!this.state.isZoom) {
-        // this.fullscreenRef.current.focus();
-        this.slideshowRef;
-      }
     }
   };
 
@@ -150,7 +111,7 @@ class Slideshow extends Component {
     });
 
     return (
-      <>
+      <FocusTrap>
         <div
           id="slideshow"
           className={`${this.state.isZoom ? classes + ' fullscreen' : classes}`}
@@ -162,9 +123,6 @@ class Slideshow extends Component {
             data-testid="fullscreen-button"
             className="slideshow_fullscreen"
             onClick={this.fullscreen}
-            blur={() => {
-              this.fullscreenRef.focus();
-            }}
           >
             {!this.state.isZoom && (
               <>
@@ -232,7 +190,7 @@ class Slideshow extends Component {
             <span className="invisible">Next Slide</span>
           </button>
         </div>
-      </>
+      </FocusTrap>
     );
   }
 }
