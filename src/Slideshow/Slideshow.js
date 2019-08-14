@@ -114,6 +114,7 @@ class Slideshow extends Component {
       <FocusTrap>
         <div
           id="slideshow"
+          data-testid="slideshow"
           className={`${this.state.isZoom ? classes + ' fullscreen' : classes}`}
           ref={this.slideshowRef}
         >
@@ -123,11 +124,14 @@ class Slideshow extends Component {
             data-testid="fullscreen-button"
             className="slideshow_fullscreen"
             onClick={this.fullscreen}
+            ref={this.fullscreenRef}
           >
             {!this.state.isZoom && (
               <>
                 <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
-                <span className="invisible">Fullscreen Slide</span>
+                <span className="invisible" data-testid="icon-fullscreen">
+                  Fullscreen Slide
+                </span>
               </>
             )}
             {this.state.isZoom && (
@@ -136,7 +140,9 @@ class Slideshow extends Component {
                   elementClass="slideshow_icon slideshow_icon-shrink"
                   aria-label="close"
                 />
-                <span className="invisible">Shrink Slide</span>
+                <span className="invisible" data-testid="icon-shrink">
+                  Shrink Slide
+                </span>
               </>
             )}
           </button>
@@ -161,11 +167,7 @@ class Slideshow extends Component {
               aria-haspopup="true"
               role="dialog"
               onClick={this.fullscreen}
-              blur={() => {
-                this.fullscreenRef.focus();
-              }}
               onKeyUp={this.wrapKeyHandler}
-              ref={this.fullscreenRef}
             >
               {this.getNearestImages(this.state.images, this.state.index).map(
                 (image) => (
