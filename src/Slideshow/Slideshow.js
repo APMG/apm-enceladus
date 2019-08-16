@@ -123,113 +123,219 @@ class Slideshow extends Component {
       this.fullscreenRef.current.focus();
     }
   };
+
   render() {
     const classes = classNames({
       slideshow: true,
       [this.props.elementClass]: this.props.elementClass
     });
+    const { activeTrap } = this.state;
 
     return (
-      <FocusTrap>
-        <div
-          id="slideshow"
-          data-testid="slideshow"
-          className={`${
-            this.state.isFullscreen ? classes + ' fullscreen' : classes
-          }`}
-          ref={this.slideshowRef}
-        >
-          <button
-            aria-haspopup="true"
-            aria-label="fullscreen slideshow"
-            data-testid="fullscreen-button"
-            className="slideshow_fullscreen"
-            onClick={this.fullscreen}
-            ref={this.fullscreenRef}
-            onKeyUp={this.wrapKeyHandler}
-          >
-            {!this.state.isFullscreen && (
-              <>
-                <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
-                <span className="invisible" data-testid="icon-fullscreen">
-                  Fullscreen Slide
-                </span>
-              </>
-            )}
-            {this.state.isFullscreen && (
-              <>
-                <IconClose
-                  elementClass="slideshow_icon slideshow_icon-shrink"
-                  aria-label="close"
-                />
-                <span className="invisible" data-testid="icon-shrink">
-                  Shrink Slide
-                </span>
-              </>
-            )}
-          </button>
-          <button
-            data-testid="prev-button"
-            aria-label="Icon Chevron Left"
-            className="slideshow_button slideshow_button-prev"
-            onClick={this.prev}
-          >
-            <IconChevronLeft elementClass="slideshow_icon" />
-            <span className="invisible">Previous Slide</span>
-          </button>
-          <>
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      <>
+        {activeTrap ? (
+          <FocusTrap>
             <div
+              id="slideshow"
+              data-testid="slideshow"
               className={`${
-                this.state.isFullscreen
-                  ? 'slideshow_container fullscreen'
-                  : 'slideshow_container'
+                this.state.isFullscreen ? classes + ' fullscreen' : classes
               }`}
-              aria-modal={this.state.isFullscreen}
+              ref={this.slideshowRef}
+            >
+              <button
+                aria-haspopup="true"
+                aria-label="fullscreen slideshow"
+                data-testid="fullscreen-button"
+                className="slideshow_fullscreen"
+                onClick={this.fullscreen}
+                ref={this.fullscreenRef}
+                onKeyUp={this.wrapKeyHandler}
+              >
+                {!this.state.isFullscreen && (
+                  <>
+                    <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+                    <span className="invisible" data-testid="icon-fullscreen">
+                      Fullscreen Slide
+                    </span>
+                  </>
+                )}
+                {this.state.isFullscreen && (
+                  <>
+                    <IconClose
+                      elementClass="slideshow_icon slideshow_icon-shrink"
+                      aria-label="close"
+                    />
+                    <span className="invisible" data-testid="icon-shrink">
+                      Shrink Slide
+                    </span>
+                  </>
+                )}
+              </button>
+              <button
+                data-testid="prev-button"
+                aria-label="Icon Chevron Left"
+                className="slideshow_button slideshow_button-prev"
+                onClick={this.prev}
+              >
+                <IconChevronLeft elementClass="slideshow_icon" />
+                <span className="invisible">Previous Slide</span>
+              </button>
+              <>
+                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                <div
+                  className={`${
+                    this.state.isFullscreen
+                      ? 'slideshow_container fullscreen'
+                      : 'slideshow_container'
+                  }`}
+                  aria-modal={this.state.isFullscreen}
+                  aria-haspopup="true"
+                  role="dialog"
+                  onClick={this.isImageOnclickActive}
+                  onKeyUp={this.wrapKeyHandler}
+                >
+                  {this.getNearestImages(
+                    this.state.images,
+                    this.state.index
+                  ).map((image) => (
+                    <Poses
+                      key={image.index}
+                      animation={this.props.animation}
+                      image={image}
+                      stateIndex={this.state.index}
+                      max={this.state.images.length}
+                    />
+                  ))}
+                </div>
+              </>
+
+              <button
+                data-testid="next-button"
+                aria-label="Icon Chevron Right"
+                className="slideshow_button slideshow_button-next"
+                onClick={this.next}
+              >
+                <IconChevronRight elementClass="slideshow_icon" />
+                <span className="invisible">Next Slide</span>
+              </button>
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+              <div
+                id="slideshowBg"
+                onClick={this.isBgOnclickActive}
+                onKeyUp={this.wrapKeyHandler}
+                role="figure"
+                data-testid="slideshowBg"
+                className={`${
+                  this.state.isFullscreen
+                    ? 'slideshow_bg fullscreen'
+                    : 'slideshow_bg'
+                }`}
+                ref={this.slideshowBgRef}
+              />
+            </div>
+          </FocusTrap>
+        ) : (
+          <div
+            id="slideshow"
+            data-testid="slideshow"
+            className={`${
+              this.state.isFullscreen ? classes + ' fullscreen' : classes
+            }`}
+            ref={this.slideshowRef}
+          >
+            <button
               aria-haspopup="true"
-              role="dialog"
-              onClick={this.isImageOnclickActive}
+              aria-label="fullscreen slideshow"
+              data-testid="fullscreen-button"
+              className="slideshow_fullscreen"
+              onClick={this.fullscreen}
+              ref={this.fullscreenRef}
               onKeyUp={this.wrapKeyHandler}
             >
-              {this.getNearestImages(this.state.images, this.state.index).map(
-                (image) => (
-                  <Poses
-                    key={image.index}
-                    animation={this.props.animation}
-                    image={image}
-                    stateIndex={this.state.index}
-                    max={this.state.images.length}
-                  />
-                )
+              {!this.state.isFullscreen && (
+                <>
+                  <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+                  <span className="invisible" data-testid="icon-fullscreen">
+                    Fullscreen Slide
+                  </span>
+                </>
               )}
-            </div>
-          </>
+              {this.state.isFullscreen && (
+                <>
+                  <IconClose
+                    elementClass="slideshow_icon slideshow_icon-shrink"
+                    aria-label="close"
+                  />
+                  <span className="invisible" data-testid="icon-shrink">
+                    Shrink Slide
+                  </span>
+                </>
+              )}
+            </button>
+            <button
+              data-testid="prev-button"
+              aria-label="Icon Chevron Left"
+              className="slideshow_button slideshow_button-prev"
+              onClick={this.prev}
+            >
+              <IconChevronLeft elementClass="slideshow_icon" />
+              <span className="invisible">Previous Slide</span>
+            </button>
+            <>
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+              <div
+                className={`${
+                  this.state.isFullscreen
+                    ? 'slideshow_container fullscreen'
+                    : 'slideshow_container'
+                }`}
+                aria-modal={this.state.isFullscreen}
+                aria-haspopup="true"
+                role="dialog"
+                onClick={this.isImageOnclickActive}
+                onKeyUp={this.wrapKeyHandler}
+              >
+                {this.getNearestImages(this.state.images, this.state.index).map(
+                  (image) => (
+                    <Poses
+                      key={image.index}
+                      animation={this.props.animation}
+                      image={image}
+                      stateIndex={this.state.index}
+                      max={this.state.images.length}
+                    />
+                  )
+                )}
+              </div>
+            </>
 
-          <button
-            data-testid="next-button"
-            aria-label="Icon Chevron Right"
-            className="slideshow_button slideshow_button-next"
-            onClick={this.next}
-          >
-            <IconChevronRight elementClass="slideshow_icon" />
-            <span className="invisible">Next Slide</span>
-          </button>
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-          <div
-            id="slideshowBg"
-            onClick={this.isBgOnclickActive}
-            onKeyUp={this.wrapKeyHandler}
-            role="figure"
-            data-testid="slideshowBg"
-            className={`${
-              this.state.isFullscreen
-                ? 'slideshow_bg fullscreen'
-                : 'slideshow_bg'
-            }`}
-            ref={this.slideshowBgRef}
-          />
-        </div>
-      </FocusTrap>
+            <button
+              data-testid="next-button"
+              aria-label="Icon Chevron Right"
+              className="slideshow_button slideshow_button-next"
+              onClick={this.next}
+            >
+              <IconChevronRight elementClass="slideshow_icon" />
+              <span className="invisible">Next Slide</span>
+            </button>
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <div
+              id="slideshowBg"
+              onClick={this.isBgOnclickActive}
+              onKeyUp={this.wrapKeyHandler}
+              role="figure"
+              data-testid="slideshowBg"
+              className={`${
+                this.state.isFullscreen
+                  ? 'slideshow_bg fullscreen'
+                  : 'slideshow_bg'
+              }`}
+              ref={this.slideshowBgRef}
+            />
+          </div>
+        )}
+      </>
     );
   }
 }
