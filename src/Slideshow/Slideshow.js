@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
 import IconChevronLeft from './svg/IconChevronLeft';
 import IconFullscreen from './svg/IconFullscreen';
-import IconShrink from './svg/IconShrink';
+import IconClose from './svg/IconClose';
 import Poses from './Poses';
 import { animationDuration } from './animations';
 import FocusTrap from 'focus-trap-react';
@@ -16,6 +16,7 @@ class Slideshow extends Component {
     super(props);
     this.fullscreenRef = React.createRef();
     this.slideshowRef = React.createRef();
+    this.slideshowBgRef = React.createRef();
     let images = props.images;
 
     // Adds an index property to each image
@@ -27,7 +28,7 @@ class Slideshow extends Component {
       index: 0,
       images: images,
       disabled: false,
-      isZoom: false,
+      isFullscreen: false,
       activeTrap: false
     };
   }
@@ -76,24 +77,52 @@ class Slideshow extends Component {
 
   fullscreen = () => {
     const body = document.body;
-    const slideshowElement = this.slideshowRef.current;
-    if (!this.state.isZoom) {
-      if (slideshowElement) {
-        slideshowElement.current.focus();
+    if (!this.state.isFullscreen) {
+      if (this.fullscreenRef.current) {
+        this.fullscreenRef.current.focus();
       }
       body.style.height = '100vh';
       body.style.overflowY = 'hidden';
     }
-    if (this.state.isZoom) {
+    if (this.state.isFullscreen) {
       body.style.height = '100%';
       body.style.overflowY = 'visible';
     }
     this.setState({
-      isZoom: !this.state.isZoom,
+      isFullscreen: !this.state.isFullscreen,
       activeTrap: !this.state.activeTrap
     });
   };
 
+  isImageOnclickActive = () => {
+    //if the state is fullscreen disable onclick
+    if (!this.state.isFullscreen) {
+      this.fullscreen();
+    }
+    //if the state is fullscreen disable onclick
+    if (this.state.isFullscreen) {
+      return;
+    }
+  };
+
+  isBgOnclickActive = () => {
+    //if the state is fullscreen disable onclick
+    if (this.state.isFullscreen) {
+      this.fullscreen();
+    }
+    //if the state is fullscreen disable onclick
+    if (!this.state.isFullscreen) {
+      return;
+    }
+  };
+
+  wrapKeyHandler = (event) => {
+    if (event.keyCode === 27 && this.state.isFullscreen) {
+      // escape key
+      this.fullscreen();
+      this.fullscreenRef.current.focus();
+    }
+  };
   render() {
     const classes = classNames({
       slideshow: true,
@@ -105,7 +134,9 @@ class Slideshow extends Component {
         <div
           id="slideshow"
           data-testid="slideshow"
-          className={`${this.state.isZoom ? classes + ' fullscreen' : classes}`}
+          className={`${
+            this.state.isFullscreen ? classes + ' fullscreen' : classes
+          }`}
           ref={this.slideshowRef}
         >
           <button
@@ -115,8 +146,9 @@ class Slideshow extends Component {
             className="slideshow_fullscreen"
             onClick={this.fullscreen}
             ref={this.fullscreenRef}
+            onKeyUp={this.wrapKeyHandler}
           >
-            {!this.state.isZoom && (
+            {!this.state.isFullscreen && (
               <>
                 <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
                 <span className="invisible" data-testid="icon-fullscreen">
@@ -124,9 +156,9 @@ class Slideshow extends Component {
                 </span>
               </>
             )}
-            {this.state.isZoom && (
+            {this.state.isFullscreen && (
               <>
-                <IconShrink
+                <IconClose
                   elementClass="slideshow_icon slideshow_icon-shrink"
                   aria-label="close"
                 />
@@ -149,14 +181,14 @@ class Slideshow extends Component {
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <div
               className={`${
-                this.state.isZoom
+                this.state.isFullscreen
                   ? 'slideshow_container fullscreen'
                   : 'slideshow_container'
               }`}
-              aria-modal={this.state.isZoom}
+              aria-modal={this.state.isFullscreen}
               aria-haspopup="true"
               role="dialog"
-              onClick={this.fullscreen}
+              onClick={this.isImageOnclickActive}
               onKeyUp={this.wrapKeyHandler}
             >
               {this.getNearestImages(this.state.images, this.state.index).map(
@@ -172,6 +204,7 @@ class Slideshow extends Component {
               )}
             </div>
           </>
+
           <button
             data-testid="next-button"
             aria-label="Icon Chevron Right"
@@ -181,6 +214,20 @@ class Slideshow extends Component {
             <IconChevronRight elementClass="slideshow_icon" />
             <span className="invisible">Next Slide</span>
           </button>
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <div
+            id="slideshowBg"
+            onClick={this.isBgOnclickActive}
+            onKeyUp={this.wrapKeyHandler}
+            role="figure"
+            data-testid="slideshowBg"
+            className={`${
+              this.state.isFullscreen
+                ? 'slideshow_bg fullscreen'
+                : 'slideshow_bg'
+            }`}
+            ref={this.slideshowBgRef}
+          />
         </div>
       </FocusTrap>
     );
