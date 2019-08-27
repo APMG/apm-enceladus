@@ -8,12 +8,63 @@ import SlideshowInner from './SlideshowInner';
 class Slideshow extends Component {
   constructor(props) {
     super(props);
-
+    this.fullscreenRef = React.createRef();
+    this.slideshowBgRef = React.createRef();
     this.state = {
       isFullscreen: false,
       activeTrap: false
     };
   }
+
+  fullscreen = () => {
+    const body = document.body;
+
+    if (!this.state.isFullscreen) {
+      if (this.fullscreenRef.current) {
+        this.fullscreenRef.current.focus();
+      }
+      body.style.height = '100vh';
+      body.style.overflowY = 'hidden';
+    }
+    if (this.state.isFullscreen) {
+      body.style.height = 'auto';
+      body.style.overflowY = 'visible';
+    }
+    this.setState({
+      isFullscreen: !this.state.isFullscreen,
+      activeTrap: !this.state.activeTrap
+    });
+  };
+
+  isImageOnclickActive = () => {
+    //if the state is fullscreen disable onclick
+    if (!this.state.isFullscreen) {
+      this.fullscreen();
+    }
+    //if the state is fullscreen disable onclick
+    if (this.state.isFullscreen) {
+      return;
+    }
+  };
+
+  isBgOnclickActive = () => {
+    //if the state is fullscreen disable onclick
+    if (this.state.isFullscreen) {
+      this.fullscreen();
+    }
+    //if the state is fullscreen disable onclick
+    if (!this.state.isFullscreen) {
+      return;
+    }
+  };
+
+  wrapKeyHandler = (event) => {
+    if (event.keyCode === 27 && this.state.isFullscreen) {
+      // escape key
+      this.fullscreen();
+      this.fullscreenRef.current.focus();
+    }
+  };
 
   render() {
     const { activeTrap } = this.state;
@@ -24,12 +75,24 @@ class Slideshow extends Component {
             <SlideshowInner
               isFullscreen={this.state.isFullscreen}
               images={this.props.images}
+              fullscreen={this.fullscreen}
+              isBgOnclickActive={this.isBgOnclickActive}
+              wrapKeyHandler={this.wrapKeyHandler}
+              isImageOnclickActive={this.isImageOnclickActive}
+              fullscreenRef={this.fullscreenRef}
+              slideshowBgRef={this.slideshowBgRef}
             />
           </FocusTrap>
         ) : (
           <SlideshowInner
             isFullscreen={this.state.isFullscreen}
             images={this.props.images}
+            fullscreen={this.fullscreen}
+            isBgOnclickActive={this.isBgOnclickActive}
+            wrapKeyHandler={this.wrapKeyHandler}
+            isImageOnclickActive={this.isImageOnclickActive}
+            fullscreenRef={this.fullscreenRef}
+            slideshowBgRef={this.slideshowBgRef}
           />
         )}
       </>

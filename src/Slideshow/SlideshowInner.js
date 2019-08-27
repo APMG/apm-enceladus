@@ -11,8 +11,7 @@ import { animationDuration } from './animations';
 class SlideshowInner extends Component {
   constructor(props) {
     super(props);
-    this.fullscreenRef = React.createRef();
-    this.slideshowBgRef = React.createRef();
+
     let images = props.images;
 
     // Adds an index property to each image
@@ -23,8 +22,7 @@ class SlideshowInner extends Component {
     this.state = {
       index: 0,
       images: images,
-      disabled: false,
-      isFullscreen: false
+      disabled: false
     };
   }
 
@@ -70,54 +68,6 @@ class SlideshowInner extends Component {
     }, animationDuration);
   };
 
-  fullscreen = () => {
-    const body = document.body;
-    if (!this.state.isFullscreen) {
-      if (this.fullscreenRef.current) {
-        this.fullscreenRef.current.focus();
-      }
-      body.style.height = '100vh';
-      body.style.overflowY = 'hidden';
-    }
-    if (this.state.isFullscreen) {
-      body.style.height = 'auto';
-      body.style.overflowY = 'visible';
-    }
-    this.setState({
-      isFullscreen: !this.state.isFullscreen,
-      activeTrap: !this.state.activeTrap
-    });
-  };
-
-  isImageOnclickActive = () => {
-    //if the state is fullscreen disable onclick
-    if (!this.state.isFullscreen) {
-      this.fullscreen();
-    }
-    //if the state is fullscreen disable onclick
-    if (this.state.isFullscreen) {
-      return;
-    }
-  };
-
-  isBgOnclickActive = () => {
-    //if the state is fullscreen disable onclick
-    if (this.state.isFullscreen) {
-      this.fullscreen();
-    }
-    //if the state is fullscreen disable onclick
-    if (!this.state.isFullscreen) {
-      return;
-    }
-  };
-
-  wrapKeyHandler = (event) => {
-    if (event.keyCode === 27 && this.state.isFullscreen) {
-      // escape key
-      this.fullscreen();
-      this.fullscreenRef.current.focus();
-    }
-  };
   render() {
     const classes = classNames({
       slideshow: true,
@@ -128,7 +78,7 @@ class SlideshowInner extends Component {
         id="slideshow"
         data-testid="slideshow"
         className={`${
-          this.state.isFullscreen ? classes + ' fullscreen' : classes
+          this.props.isFullscreen ? classes + ' fullscreen' : classes
         }`}
       >
         <button
@@ -136,11 +86,11 @@ class SlideshowInner extends Component {
           aria-label="fullscreen slideshow"
           data-testid="fullscreen-button"
           className="slideshow_fullscreen"
-          onClick={this.fullscreen}
-          ref={this.fullscreenRef}
-          onKeyUp={this.wrapKeyHandler}
+          onClick={this.props.fullscreen}
+          ref={this.props.fullscreenRef}
+          onKeyUp={this.props.wrapKeyHandler}
         >
-          {!this.state.isFullscreen && (
+          {!this.props.isFullscreen && (
             <>
               <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
               <span className="invisible" data-testid="icon-fullscreen">
@@ -148,7 +98,7 @@ class SlideshowInner extends Component {
               </span>
             </>
           )}
-          {this.state.isFullscreen && (
+          {this.props.isFullscreen && (
             <>
               <IconClose
                 elementClass="slideshow_icon slideshow_icon-shrink"
@@ -173,14 +123,14 @@ class SlideshowInner extends Component {
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <div
             className={`${
-              this.state.isFullscreen
+              this.props.isFullscreen
                 ? 'slideshow_container fullscreen'
                 : 'slideshow_container'
             }`}
-            aria-modal={this.state.isFullscreen}
+            aria-modal={this.props.isFullscreen}
             aria-haspopup="true"
             role="dialog"
-            onClick={this.isImageOnclickActive}
+            onClick={this.props.isImageOnclickActive}
             onKeyUp={this.wrapKeyHandler}
           >
             {this.getNearestImages(this.state.images, this.state.index).map(
@@ -209,14 +159,14 @@ class SlideshowInner extends Component {
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
           id="slideshowBg"
-          onClick={this.isBgOnclickActive}
-          onKeyUp={this.wrapKeyHandler}
+          onClick={this.props.isBgOnclickActive}
+          onKeyUp={this.props.wrapKeyHandler}
           role="figure"
           data-testid="slideshowBg"
           className={`${
-            this.state.isFullscreen ? 'slideshow_bg fullscreen' : 'slideshow_bg'
+            this.props.isFullscreen ? 'slideshow_bg fullscreen' : 'slideshow_bg'
           }`}
-          ref={this.slideshowBgRef}
+          ref={this.props.slideshowBgRef}
         />
       </div>
     );
@@ -224,6 +174,13 @@ class SlideshowInner extends Component {
 }
 
 SlideshowInner.propTypes = {
+  slideshowBgRef: PropTypes.arr,
+  fullscreenRef: PropTypes.arr,
+  isFullscreen: PropTypes.bool,
+  fullscreen: PropTypes.func,
+  isBgOnclickActive: PropTypes.func,
+  wrapKeyHandler: PropTypes.func,
+  isImageOnclickActive: PropTypes.func,
   images: PropTypes.arrayOf(
     PropTypes.shape({
       aspect_ratios: PropTypes.shape({
