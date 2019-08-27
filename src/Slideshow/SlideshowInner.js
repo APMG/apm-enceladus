@@ -11,7 +11,6 @@ import { animationDuration } from './animations';
 class SlideshowInner extends Component {
   constructor(props) {
     super(props);
-    this.slideshowBgRef = React.createRef();
     let images = props.images;
 
     // Adds an index property to each image
