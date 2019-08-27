@@ -8,14 +8,16 @@ import SlideshowInner from './SlideshowInner';
 class Slideshow extends Component {
   constructor(props) {
     super(props);
-    this.fullscreenRef = React.createRef();
-    this.slideshowBgRef = React.createRef();
+
     this.state = {
       isFullscreen: false,
       activeTrap: false
     };
   }
 
+  componentDidMount() {
+    this.fullscreenRef = React.createRef();
+  }
   fullscreen = () => {
     const body = document.body;
 
