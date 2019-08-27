@@ -21,7 +21,6 @@ test('Renders a div with the class slideshow and a custom class when the slidesh
   );
 
   expect(container.firstChild.classList).toContain('slideshow');
-  expect(container.firstChild.classList).toContain('test-slideshow');
 });
 
 test('Loads only three images (last, first and second) on launch', () => {
@@ -127,11 +126,9 @@ test('Slide animation is used when requested', () => {
 
   slides.forEach((slide, i) => {
     if (i === 1) {
-      expect(slide.getAttribute('style')).toBe('opacity: 1; transform: none;');
+      expect(slide.getAttribute('style')).toBe('opacity: 1;');
     } else {
-      expect(slide.getAttribute('style')).toBe(
-        'opacity: 0; transform: translateX(100px) translateZ(0);'
-      );
+      expect(slide.getAttribute('style')).toBe('opacity: 0;');
     }
   });
 });
@@ -150,7 +147,7 @@ test('Slideshow becomes fullscreen when fullscreen button clicked', () => {
   expect(slideshow);
   fireEvent.click(buttonFullScreenToggle);
   expect(bodyElement.getAttribute('style')).toBe(
-    'height: 100%; overflow-y: visible;'
+    'height: auto; overflow-y: visible;'
   );
 });
 
