@@ -11,7 +11,7 @@ import { animationDuration } from './animations';
 class SlideshowInner extends Component {
   constructor(props) {
     super(props);
-
+    this.slideshowBgRef = React.createRef();
     let images = props.images;
 
     // Adds an index property to each image
@@ -24,6 +24,10 @@ class SlideshowInner extends Component {
       images: images,
       disabled: false
     };
+  }
+
+  componentDidMount() {
+    this.slideshowBgRef = React.createRef();
   }
 
   prevIndex(i) {
@@ -166,7 +170,7 @@ class SlideshowInner extends Component {
           className={`${
             this.props.isFullscreen ? 'slideshow_bg fullscreen' : 'slideshow_bg'
           }`}
-          ref={this.props.slideshowBgRef}
+          ref={this.slideshowBgRef}
         />
       </div>
     );
@@ -174,8 +178,7 @@ class SlideshowInner extends Component {
 }
 
 SlideshowInner.propTypes = {
-  slideshowBgRef: PropTypes.arr,
-  fullscreenRef: PropTypes.arr,
+  fullscreenRef: PropTypes.func,
   isFullscreen: PropTypes.bool,
   fullscreen: PropTypes.func,
   isBgOnclickActive: PropTypes.func,
