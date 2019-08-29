@@ -18,6 +18,7 @@ class Slideshow extends Component {
   componentDidMount() {
     this.fullscreenRef = React.createRef();
   }
+
   fullscreen = () => {
     const body = document.body;
 
@@ -60,14 +61,6 @@ class Slideshow extends Component {
     }
   };
 
-  wrapKeyHandler = (event) => {
-    if (event.keyCode === 27 && this.state.isFullscreen) {
-      // escape key
-      this.fullscreen();
-      this.fullscreenRef.current.focus();
-    }
-  };
-
   render() {
     const { activeTrap } = this.state;
     return (
@@ -79,7 +72,6 @@ class Slideshow extends Component {
               images={this.props.images}
               fullscreen={this.fullscreen}
               isBgOnclickActive={this.isBgOnclickActive}
-              wrapKeyHandler={this.wrapKeyHandler}
               isImageOnclickActive={this.isImageOnclickActive}
               fullscreenRef={this.fullscreenRef}
               slideshowBgRef={this.slideshowBgRef}
@@ -91,7 +83,6 @@ class Slideshow extends Component {
             images={this.props.images}
             fullscreen={this.fullscreen}
             isBgOnclickActive={this.isBgOnclickActive}
-            wrapKeyHandler={this.wrapKeyHandler}
             isImageOnclickActive={this.isImageOnclickActive}
             fullscreenRef={this.fullscreenRef}
             slideshowBgRef={this.slideshowBgRef}
