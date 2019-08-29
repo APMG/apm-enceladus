@@ -71,6 +71,23 @@ class SlideshowInner extends Component {
     }, animationDuration);
   };
 
+  wrapKeyHandler = () => {
+    if (event.keyCode === 39) {
+      //arrow right key
+      this.next();
+    }
+    if (event.keyCode === 37) {
+      //arrow left key
+      this.prev();
+    }
+
+    if (event.keyCode === 27 && this.props.isFullscreen) {
+      // escape key
+      this.props.fullscreen();
+      this.props.fullscreenRef.current.focus();
+    }
+  };
+
   render() {
     const classes = classNames({
       slideshow: true,
@@ -91,7 +108,7 @@ class SlideshowInner extends Component {
           className="slideshow_fullscreen"
           onClick={this.props.fullscreen}
           ref={this.props.fullscreenRef}
-          onKeyUp={this.props.wrapKeyHandler}
+          onKeyUp={this.wrapKeyHandler}
         >
           {!this.props.isFullscreen && (
             <>
@@ -118,6 +135,7 @@ class SlideshowInner extends Component {
           aria-label="Icon Chevron Left"
           className="slideshow_button slideshow_button-prev"
           onClick={this.prev}
+          onKeyUp={this.wrapKeyHandler}
         >
           <IconChevronLeft elementClass="slideshow_icon" />
           <span className="invisible">Previous Slide</span>
@@ -155,6 +173,7 @@ class SlideshowInner extends Component {
           aria-label="Icon Chevron Right"
           className="slideshow_button slideshow_button-next"
           onClick={this.next}
+          onKeyUp={this.wrapKeyHandler}
         >
           <IconChevronRight elementClass="slideshow_icon" />
           <span className="invisible">Next Slide</span>
@@ -163,7 +182,7 @@ class SlideshowInner extends Component {
         <div
           id="slideshowBg"
           onClick={this.props.isBgOnclickActive}
-          onKeyUp={this.props.wrapKeyHandler}
+          onKeyUp={this.wrapKeyHandler}
           role="figure"
           data-testid="slideshowBg"
           className={`${
@@ -177,7 +196,7 @@ class SlideshowInner extends Component {
 }
 
 SlideshowInner.propTypes = {
-  fullscreenRef: PropTypes.func,
+  fullscreenRef: PropTypes.object,
   isFullscreen: PropTypes.bool,
   fullscreen: PropTypes.func,
   isBgOnclickActive: PropTypes.func,
