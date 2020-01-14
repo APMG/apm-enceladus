@@ -147,7 +147,7 @@ test('Slideshow becomes fullscreen when fullscreen button clicked', () => {
   expect(slideshow);
   fireEvent.click(buttonFullScreenToggle);
   expect(bodyElement.getAttribute('style')).toBe(
-    'height: auto; overflow-y: visible;'
+    'height: 100vh; overflow-y: hidden;'
   );
 });
 

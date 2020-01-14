@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from '@apmg/mimas';
-import SlideCredit from './SlideCredit';
+import SlideCredit from './Slidecredit';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 
@@ -69,6 +69,7 @@ class Slide extends Component {
           </ManageFullScreenHeight>
 
           <figcaption className="slideshow_caption" ref={this.refSlideCallback}>
+            {this.props.image.long_caption}
             {this.props.image.credit && (
               <div className="slideshow_credit">
                 <SlideCredit
@@ -77,7 +78,6 @@ class Slide extends Component {
                 />
               </div>
             )}
-            {this.props.image.long_caption}
           </figcaption>
         </figure>
       </div>
