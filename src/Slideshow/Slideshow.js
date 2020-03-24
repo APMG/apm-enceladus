@@ -84,12 +84,16 @@ class Slideshow extends Component {
             type="slides"
           >
             {this.props.images.map((image) => {
+              const instance = image.aspect_ratios.normal.instances.sort(
+                (a, b) => (a.width > b.width ? 1 : -1)
+              )[0];
+
               return (
                 <amp-img
-                  key={image.aspect_ratios.normal.instances[0].url}
-                  src={image.aspect_ratios.normal.instances[0].url}
-                  width={image.aspect_ratios.normal.instances[0].width}
-                  height={image.aspect_ratios.normal.instances[0].height}
+                  key={instance.url}
+                  src={instance.url}
+                  width={instance.width}
+                  height={instance.height}
                 />
               );
             })}
@@ -128,7 +132,7 @@ class Slideshow extends Component {
 }
 
 Slideshow.propTypes = {
-  isAmp: PropTypes.boolean,
+  isAmp: PropTypes.bool,
   images: PropTypes.arrayOf(
     PropTypes.shape({
       aspect_ratios: PropTypes.shape({
