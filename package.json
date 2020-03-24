@@ -32,8 +32,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslint && npm run prettier",
-      "pre-push": "npm run eslint && npm run prettier"
+      "pre-commit": "yarn eslint && yarn prettier",
+      "pre-push": "yarn eslint && yarn prettier"
     }
   },
   "eslintConfig": {
