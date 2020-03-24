@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import SlideshowInner from './SlideshowInner';
+import Head from 'next/head';
 
 // Links will not work with react-swipeable. If you need to add links, we might have to consider removing the swiping capabilities. Should I try react-swipeable-views? react-easy-swipe?
 
@@ -11,7 +12,8 @@ class Slideshow extends Component {
 
     this.state = {
       isFullscreen: false,
-      activeTrap: false
+      activeTrap: false,
+      isAmp: props.isAmp ? props.isAmp : false
     };
   }
 
@@ -62,7 +64,39 @@ class Slideshow extends Component {
   };
 
   render() {
-    const { activeTrap } = this.state;
+    const { activeTrap, isAmp } = this.state;
+    if (isAmp) {
+      return (
+        <>
+          <Head>
+            <script
+              async
+              custom-element="amp-carousel"
+              src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
+            />
+          </Head>
+          <amp-carousel
+            width={this.props.images[0].aspect_ratios.normal.instances[0].width}
+            height={
+              this.props.images[0].aspect_ratios.normal.instances[0].height
+            }
+            layout="responsive"
+            type="slides"
+          >
+            {this.props.images.map((image) => {
+              return (
+                <amp-img
+                  key={image.aspect_ratios.normal.instances[0].url}
+                  src={image.aspect_ratios.normal.instances[0].url}
+                  width={image.aspect_ratios.normal.instances[0].width}
+                  height={image.aspect_ratios.normal.instances[0].height}
+                />
+              );
+            })}
+          </amp-carousel>
+        </>
+      );
+    }
     return (
       <>
         {activeTrap ? (
@@ -94,6 +128,7 @@ class Slideshow extends Component {
 }
 
 Slideshow.propTypes = {
+  isAmp: PropTypes.boolean,
   images: PropTypes.arrayOf(
     PropTypes.shape({
       aspect_ratios: PropTypes.shape({
