@@ -65,9 +65,9 @@ class Slideshow extends Component {
 
   render() {
     const { activeTrap, isAmp } = this.state;
-    const aspectRatio =
-      this.props.images[0].preferred_aspect_ratio_slug || 'normal';
     if (isAmp) {
+      const aspectRatio =
+        this.props.images[0].preferred_aspect_ratio_slug || 'normal';
       return (
         <>
           <Head>
