@@ -66,6 +66,8 @@ class Slideshow extends Component {
   render() {
     const { activeTrap, isAmp } = this.state;
     if (isAmp) {
+      const aspectRatio =
+        this.props.images[0].preferred_aspect_ratio_slug || 'normal';
       return (
         <>
           <Head>
@@ -76,15 +78,18 @@ class Slideshow extends Component {
             />
           </Head>
           <amp-carousel
-            width={this.props.images[0].aspect_ratios.normal.instances[0].width}
+            width={
+              this.props.images[0].aspect_ratios[aspectRatio].instances[0].width
+            }
             height={
-              this.props.images[0].aspect_ratios.normal.instances[0].height
+              this.props.images[0].aspect_ratios[aspectRatio].instances[0]
+                .height
             }
             layout="responsive"
             type="slides"
           >
             {this.props.images.map((image) => {
-              const instance = image.aspect_ratios.normal.instances.sort(
+              const instance = image.aspect_ratios[aspectRatio].instances.sort(
                 (a, b) => (a.width > b.width ? 1 : -1)
               )[0];
 

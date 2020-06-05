@@ -1,7 +1,7 @@
 {
   "name": "@apmg/enceladus",
   "description": "A React component that takes an array of Image objects from our American Public Media's Images API and turns it into a slideshow, with some options",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "main": "dist/bundle.js",
   "license": "MIT",
   "files": [
