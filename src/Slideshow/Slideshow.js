@@ -89,7 +89,10 @@ class Slideshow extends Component {
             type="slides"
           >
             {this.props.images.map((image) => {
-              const instance = image.aspect_ratios[aspectRatio].instances.sort(
+              const imageRatio = image.aspect_ratios[aspectRatio]
+                ? aspectRatio
+                : image.preferred_aspect_ratio_slug || 'normal';
+              const instance = image.aspect_ratios[imageRatio].instances.sort(
                 (a, b) => (a.width > b.width ? 1 : -1)
               )[0];
 
