@@ -149,7 +149,6 @@ class SlideshowInner extends Component {
                 : 'slideshow_container'
             }`}
             aria-modal={this.props.isFullscreen}
-            aria-haspopup="true"
             role="dialog"
             onClick={this.props.isImageOnclickActive}
             onKeyUp={this.wrapKeyHandler}
