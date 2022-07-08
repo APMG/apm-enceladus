@@ -149,7 +149,6 @@ class SlideshowInner extends Component {
                 : 'slideshow_container'
             }`}
             aria-modal={this.props.isFullscreen}
-            aria-haspopup="true"
             role="dialog"
             onClick={this.props.isImageOnclickActive}
             onKeyUp={this.wrapKeyHandler}
@@ -162,6 +161,8 @@ class SlideshowInner extends Component {
                   image={image}
                   stateIndex={this.state.index}
                   max={this.state.images.length}
+                  mobileAr={this.props.mobileAr}
+                  media={this.props.media}
                 />
               )
             )}
@@ -280,7 +281,16 @@ SlideshowInner.propTypes = {
     })
   ).isRequired,
   animation: PropTypes.oneOf(['fade', 'slide']),
-  elementClass: PropTypes.string
+  elementClass: PropTypes.string,
+  mobileAr: PropTypes.oneOf([
+    'normal',
+    'uncropped',
+    'square',
+    'widescreen',
+    'portrait',
+    'thumbnail'
+  ]),
+  media: PropTypes.arrayOf(PropTypes.string)
 };
 // The animation object is allowed to be "loose". It's just potentially too variable to test here, and if you mess it up, it shouldn't crash anything -- your animation just won't work.
 

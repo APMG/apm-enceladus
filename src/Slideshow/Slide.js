@@ -65,6 +65,8 @@ class Slide extends Component {
                 this.props.image.aspect_ratios.preferred_aspect_ratio_slug
               }
               elementClass="slideshow_image"
+              mobileAr={this.props.mobileAr}
+              media={this.props.media}
             />
           </ManageFullScreenHeight>
 
@@ -92,7 +94,16 @@ Slide.propTypes = {
   next: PropTypes.func,
   refSlideCallback: PropTypes.func,
   getSlideshowSize: PropTypes.func,
-  size: PropTypes.number
+  size: PropTypes.number,
+  mobileAr: PropTypes.oneOf([
+    'normal',
+    'uncropped',
+    'square',
+    'widescreen',
+    'portrait',
+    'thumbnail'
+  ]),
+  media: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default Slide;

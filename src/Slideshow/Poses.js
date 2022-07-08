@@ -26,7 +26,12 @@ class Poses extends Component {
           this.props.image.index
         )}
       >
-        <Slide image={this.props.image} max={this.props.max} />
+        <Slide
+          image={this.props.image}
+          max={this.props.max}
+          mobileAr={this.props.mobileAr}
+          media={this.props.media}
+        />
       </this.animationWrapper>
     );
   }
@@ -37,7 +42,16 @@ Poses.propTypes = {
   animation: PropTypes.string,
   stateIndex: PropTypes.number.isRequired,
   image: PropTypes.object.isRequired,
-  max: PropTypes.number.isRequired
+  max: PropTypes.number.isRequired,
+  mobileAr: PropTypes.oneOf([
+    'normal',
+    'uncropped',
+    'square',
+    'widescreen',
+    'portrait',
+    'thumbnail'
+  ]),
+  media: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default Poses;

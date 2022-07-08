@@ -17,8 +17,8 @@ const SlideCredit = (props) => {
 };
 
 SlideCredit.propTypes = {
-  creditName: PropTypes.string,
-  creditUrl: PropTypes.string
+  name: PropTypes.string,
+  url: PropTypes.string
 };
 
 export default SlideCredit;
