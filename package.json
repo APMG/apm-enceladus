@@ -46,7 +46,7 @@
     "not op_mini all"
   ],
   "peerDependencies": {
-    "@apmg/mimas": "^1.18",
+    "@apmg/mimas": "^1.1.8",
     "classnames": "^2.2.6",
     "next": "^9.3.0",
     "react": "^16.8.6",
