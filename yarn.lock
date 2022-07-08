@@ -44,10 +44,12 @@
   dependencies:
     cross-fetch "3.0.4"
 
-"@apmg/mimas@^0.3.0":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@apmg/mimas/-/mimas-0.3.3.tgz#38cdb69e4c71b30b6cbda89d24a14dd5f6e4014b"
-  integrity sha512-CQxZFDTGj8eRyHLLngatLCgyyOgGALSn8hT1wTAlNBs2KS7yhn3KEq9dLMairooNvTk3sk2uxTB0qMQ1sqj7XA==
+"@apmg/mimas@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@apmg/mimas/-/mimas-1.1.8.tgz#f4fed2d6b7009cfd6ea80edd2a74d8174eec06c7"
+  integrity sha512-3MQ+9u6sC7c0HPB+asUdd5yltQhUB+oaWStI+xGPl9l8XbP281/rrlkPJx6iQoWyWjZC3cVOt/EH7IRA8DgREA==
+  dependencies:
+    loading-attribute-polyfill "^1.5.4"
 
 "@babel/code-frame@7.5.5":
   version "7.5.5"
@@ -8104,6 +8106,11 @@ loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2
     big.js "^5.2.2"
     emojis-list "^3.0.0"
     json5 "^1.0.1"
+
+loading-attribute-polyfill@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/loading-attribute-polyfill/-/loading-attribute-polyfill-1.5.4.tgz#6c21f62265f1857eed6aa9fb548b1ab90c298e1c"
+  integrity sha512-snHz0lLNHZKIch9m82GbsEBOJGlsvl738Uk5iJwaoqNrxnTVT+bWCxp2SpNpXfKZXOPGB49TJ24GS5l4QwTkkw==
 
 locate-path@^2.0.0:
   version "2.0.0"

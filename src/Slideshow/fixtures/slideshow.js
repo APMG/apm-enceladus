@@ -203,7 +203,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-serena-brook-opens-our-show-at-the-town-hall.jpg',
     srcset:
       'https://img.apmcdn.org/c2c452354fbff94d720ba8f86e2c71ba7427b306/widescreen/e428bc-20181220-serena-brook-opens-our-show-at-the-town-hall.jpg 400w, https://img.apmcdn.org/c2c452354fbff94d720ba8f86e2c71ba7427b306/widescreen/58b2ba-20181220-serena-brook-opens-our-show-at-the-town-hall.jpg 600w, https://img.apmcdn.org/c2c452354fbff94d720ba8f86e2c71ba7427b306/widescreen/95c885-20181220-serena-brook-opens-our-show-at-the-town-hall.jpg 1000w, https://img.apmcdn.org/c2c452354fbff94d720ba8f86e2c71ba7427b306/widescreen/b3a373-20181220-serena-brook-opens-our-show-at-the-town-hall.jpg 1400w, https://img.apmcdn.org/c2c452354fbff94d720ba8f86e2c71ba7427b306/widescreen/6ceb83-20181220-serena-brook-opens-our-show-at-the-town-hall.jpg 2000w'
@@ -412,7 +412,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-st-vincent-performs-music-from-her-album-masseducation.jpg',
     srcset:
       'https://img.apmcdn.org/06de7e6c1c3fb43549aee0cef0de11eb8ced3fc8/widescreen/4edce9-20181220-st-vincent-performs-music-from-her-album-masseducation.jpg 400w, https://img.apmcdn.org/06de7e6c1c3fb43549aee0cef0de11eb8ced3fc8/widescreen/c689bf-20181220-st-vincent-performs-music-from-her-album-masseducation.jpg 600w, https://img.apmcdn.org/06de7e6c1c3fb43549aee0cef0de11eb8ced3fc8/widescreen/7350f7-20181220-st-vincent-performs-music-from-her-album-masseducation.jpg 1000w, https://img.apmcdn.org/06de7e6c1c3fb43549aee0cef0de11eb8ced3fc8/widescreen/a05f4c-20181220-st-vincent-performs-music-from-her-album-masseducation.jpg 1400w, https://img.apmcdn.org/06de7e6c1c3fb43549aee0cef0de11eb8ced3fc8/widescreen/40a7e9-20181220-st-vincent-performs-music-from-her-album-masseducation.jpg 2000w'
@@ -621,7 +621,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg',
     srcset:
       'https://img.apmcdn.org/ca7822cfd4047153e3ee56d1372231add1ccb61f/widescreen/39f108-20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg 400w, https://img.apmcdn.org/ca7822cfd4047153e3ee56d1372231add1ccb61f/widescreen/b9cc0b-20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg 600w, https://img.apmcdn.org/ca7822cfd4047153e3ee56d1372231add1ccb61f/widescreen/86ddac-20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg 1000w, https://img.apmcdn.org/ca7822cfd4047153e3ee56d1372231add1ccb61f/widescreen/8b5f7d-20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg 1400w, https://img.apmcdn.org/ca7822cfd4047153e3ee56d1372231add1ccb61f/widescreen/3b91e3-20181220-the-lfh-cast-does-some-rapid-fire-comedy.jpg 2000w'
@@ -830,7 +830,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg',
     srcset:
       'https://img.apmcdn.org/146fd82e145e8e433baa33cd878ca646c85cda35/widescreen/3354c1-20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg 400w, https://img.apmcdn.org/146fd82e145e8e433baa33cd878ca646c85cda35/widescreen/b6471a-20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg 600w, https://img.apmcdn.org/146fd82e145e8e433baa33cd878ca646c85cda35/widescreen/db20fb-20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg 1000w, https://img.apmcdn.org/146fd82e145e8e433baa33cd878ca646c85cda35/widescreen/ea0edb-20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg 1400w, https://img.apmcdn.org/146fd82e145e8e433baa33cd878ca646c85cda35/widescreen/9390fb-20181220-sara-watkins-celebrates-dionne-warwick-s-birthday.jpg 2000w'
@@ -1040,7 +1040,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg',
     srcset:
       'https://img.apmcdn.org/a96bf4ac96daebf59b471f3ab8f9983cd45ce495/widescreen/3e8642-20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg 400w, https://img.apmcdn.org/a96bf4ac96daebf59b471f3ab8f9983cd45ce495/widescreen/8e0df9-20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg 600w, https://img.apmcdn.org/a96bf4ac96daebf59b471f3ab8f9983cd45ce495/widescreen/28fbf9-20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg 1000w, https://img.apmcdn.org/a96bf4ac96daebf59b471f3ab8f9983cd45ce495/widescreen/8fb6d0-20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg 1400w, https://img.apmcdn.org/a96bf4ac96daebf59b471f3ab8f9983cd45ce495/widescreen/4942fd-20181220-the-town-hall-performs-o-little-town-of-bethlehem.jpg 2000w'
@@ -1245,7 +1245,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg',
     srcset:
       'https://img.apmcdn.org/5f8d022bf70059bb9a5697da882b5e60280c136b/widescreen/563adc-20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg 400w, https://img.apmcdn.org/5f8d022bf70059bb9a5697da882b5e60280c136b/widescreen/4304f4-20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg 600w, https://img.apmcdn.org/5f8d022bf70059bb9a5697da882b5e60280c136b/widescreen/fe4e22-20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg 1000w, https://img.apmcdn.org/5f8d022bf70059bb9a5697da882b5e60280c136b/widescreen/abb53d-20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg 1400w, https://img.apmcdn.org/5f8d022bf70059bb9a5697da882b5e60280c136b/widescreen/a62c18-20181220-jon-batiste-performs-music-from-his-album-hollywood-africans.jpg 2000w'
@@ -1454,7 +1454,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-annie-clark-performs-as-st-vincent.jpg',
     srcset:
       'https://img.apmcdn.org/cd635ab279b7da0d43dd40a24826b8d67a2b0565/widescreen/95d20f-20181220-annie-clark-performs-as-st-vincent.jpg 400w, https://img.apmcdn.org/cd635ab279b7da0d43dd40a24826b8d67a2b0565/widescreen/695a91-20181220-annie-clark-performs-as-st-vincent.jpg 600w, https://img.apmcdn.org/cd635ab279b7da0d43dd40a24826b8d67a2b0565/widescreen/564a64-20181220-annie-clark-performs-as-st-vincent.jpg 1000w, https://img.apmcdn.org/cd635ab279b7da0d43dd40a24826b8d67a2b0565/widescreen/b29d22-20181220-annie-clark-performs-as-st-vincent.jpg 1400w, https://img.apmcdn.org/cd635ab279b7da0d43dd40a24826b8d67a2b0565/widescreen/2e7f4f-20181220-annie-clark-performs-as-st-vincent.jpg 2000w'
@@ -1663,7 +1663,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-st-vincent-performs-los-ageless.jpg',
     srcset:
       'https://img.apmcdn.org/0601e21c7b350deffbecc3477192ce9e1b2a6f55/widescreen/34e3d1-20181220-st-vincent-performs-los-ageless.jpg 400w, https://img.apmcdn.org/0601e21c7b350deffbecc3477192ce9e1b2a6f55/widescreen/ddbba0-20181220-st-vincent-performs-los-ageless.jpg 600w, https://img.apmcdn.org/0601e21c7b350deffbecc3477192ce9e1b2a6f55/widescreen/1ee005-20181220-st-vincent-performs-los-ageless.jpg 1000w, https://img.apmcdn.org/0601e21c7b350deffbecc3477192ce9e1b2a6f55/widescreen/c52df4-20181220-st-vincent-performs-los-ageless.jpg 1400w, https://img.apmcdn.org/0601e21c7b350deffbecc3477192ce9e1b2a6f55/widescreen/778b65-20181220-st-vincent-performs-los-ageless.jpg 2000w'
@@ -1872,7 +1872,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url: 'https://img.publicradio.org/images/20181220-jim-gaffigan.jpg',
+    fallback: 'https://img.publicradio.org/images/20181220-jim-gaffigan.jpg',
     srcset:
       'https://img.apmcdn.org/bf377aebd95c7d569ec857b05fb169c989678f95/widescreen/ec9053-20181220-jim-gaffigan.jpg 400w, https://img.apmcdn.org/bf377aebd95c7d569ec857b05fb169c989678f95/widescreen/72831b-20181220-jim-gaffigan.jpg 600w, https://img.apmcdn.org/bf377aebd95c7d569ec857b05fb169c989678f95/widescreen/3a5b3c-20181220-jim-gaffigan.jpg 1000w, https://img.apmcdn.org/bf377aebd95c7d569ec857b05fb169c989678f95/widescreen/882955-20181220-jim-gaffigan.jpg 1400w, https://img.apmcdn.org/bf377aebd95c7d569ec857b05fb169c989678f95/widescreen/ebb904-20181220-jim-gaffigan.jpg 2000w'
   },
@@ -2080,7 +2080,7 @@ export const images = [
     type: 'apmImage',
     float: 'none',
     credit: 'American Public Media',
-    url:
+    fallback:
       'https://img.publicradio.org/images/20181220-jon-batiste-performs-don-t-stop.jpg',
     srcset:
       'https://img.apmcdn.org/6a6d601b08e40b7835755462a26148f5160ab36f/widescreen/87c7e5-20181220-jon-batiste-performs-don-t-stop.jpg 400w, https://img.apmcdn.org/6a6d601b08e40b7835755462a26148f5160ab36f/widescreen/763eee-20181220-jon-batiste-performs-don-t-stop.jpg 600w, https://img.apmcdn.org/6a6d601b08e40b7835755462a26148f5160ab36f/widescreen/883914-20181220-jon-batiste-performs-don-t-stop.jpg 1000w, https://img.apmcdn.org/6a6d601b08e40b7835755462a26148f5160ab36f/widescreen/1843de-20181220-jon-batiste-performs-don-t-stop.jpg 1400w, https://img.apmcdn.org/6a6d601b08e40b7835755462a26148f5160ab36f/widescreen/94480c-20181220-jon-batiste-performs-don-t-stop.jpg 2000w'

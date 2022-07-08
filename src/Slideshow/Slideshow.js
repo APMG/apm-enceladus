@@ -121,6 +121,8 @@ class Slideshow extends Component {
               isImageOnclickActive={this.isImageOnclickActive}
               fullscreenRef={this.fullscreenRef}
               slideshowBgRef={this.slideshowBgRef}
+              mobileAr={this.props.mobileAr}
+              media={this.props.media}
             />
           </FocusTrap>
         ) : (
@@ -132,6 +134,8 @@ class Slideshow extends Component {
             isImageOnclickActive={this.isImageOnclickActive}
             fullscreenRef={this.fullscreenRef}
             slideshowBgRef={this.slideshowBgRef}
+            mobileAr={this.props.mobileAr}
+            media={this.props.media}
           />
         )}
       </>
@@ -141,6 +145,15 @@ class Slideshow extends Component {
 
 Slideshow.propTypes = {
   isAmp: PropTypes.bool,
+  mobileAr: PropTypes.oneOf([
+    'normal',
+    'uncropped',
+    'square',
+    'widescreen',
+    'portrait',
+    'thumbnail'
+  ]),
+  media: PropTypes.arrayOf(PropTypes.string),
   images: PropTypes.arrayOf(
     PropTypes.shape({
       aspect_ratios: PropTypes.shape({
