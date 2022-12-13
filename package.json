@@ -100,5 +100,18 @@
     "focus-trap-react": "^6.0.0",
     "prop-types": "^15.7.2",
     "react-pose": "^4.0.8"
+  },
+  "resolutions": {
+    "ejs": ">=3.1.7",
+    "glob-parent": ">=5.1.2",
+    "immer": ">=9.0.6",
+    "loader-utils": ">=2.0.4",
+    "marked": ">=4.0.10",
+    "minimatch": ">=3.0.5",
+    "node-fetch": ">=2.6.7",
+    "nth-check": ">=2.0.1",
+    "prismjs": ">=1.21.0",
+    "shell-quote": ">=1.7.3",
+    "terser": ">=4.8.1"
   }
 }
