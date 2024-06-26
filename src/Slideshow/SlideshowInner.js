@@ -103,7 +103,6 @@ class SlideshowInner extends Component {
       >
         <button
           aria-haspopup="true"
-          aria-label="fullscreen slideshow"
           data-testid="fullscreen-button"
           className="slideshow_fullscreen"
           onClick={this.props.fullscreen}
@@ -114,7 +113,7 @@ class SlideshowInner extends Component {
             <>
               <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
               <span className="invisible" data-testid="icon-fullscreen">
-                Fullscreen Slide
+                Fullscreen Slideshow
               </span>
             </>
           )}
@@ -125,7 +124,7 @@ class SlideshowInner extends Component {
                 aria-label="close"
               />
               <span className="invisible" data-testid="icon-shrink">
-                Shrink Slide
+                Exit Fullscreen Slideshow
               </span>
             </>
           )}
@@ -149,7 +148,8 @@ class SlideshowInner extends Component {
                 : 'slideshow_container'
             }`}
             aria-modal={this.props.isFullscreen}
-            role="dialog"
+            aria-label="Slideshow container"
+            role={this.props.isFullscreen ? 'dialog' : false}
             onClick={this.props.isImageOnclickActive}
             onKeyUp={this.wrapKeyHandler}
           >
