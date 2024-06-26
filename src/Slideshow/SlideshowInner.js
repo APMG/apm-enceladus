@@ -102,7 +102,7 @@ class SlideshowInner extends Component {
         }`}
       >
         <button
-          aria-haspopup="true"
+          aria-haspopup={!this.props.isFullscreen ? 'dialog' : false}
           data-testid="fullscreen-button"
           className="slideshow_fullscreen"
           onClick={this.props.fullscreen}
