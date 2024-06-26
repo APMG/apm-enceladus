@@ -155,11 +155,11 @@ test('Slideshow shows correct button', () => {
   const { getByTestId, queryByText } = render(<Slideshow images={images} />);
   const buttonFullScreenToggle = getByTestId('fullscreen-button');
 
-  expect(queryByText('Shrink Slide')).toBeNull();
-  expect(queryByText('Fullscreen Slide')).not.toBeNull();
+  expect(queryByText('Exit Fullscreen Slideshow')).toBeNull();
+  expect(queryByText('Fullscreen Slideshow')).not.toBeNull();
   fireEvent.click(buttonFullScreenToggle);
-  expect(queryByText('Shrink Slide')).not.toBeNull();
-  expect(queryByText('Fullscreen Slide')).toBeNull();
+  expect(queryByText('Exit Fullscreen Slideshow')).not.toBeNull();
+  expect(queryByText('Fullscreen Slideshow')).toBeNull();
 });
 
 // FAILURES
