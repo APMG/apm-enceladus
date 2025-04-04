@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FocusTrap from 'focus-trap-react';
+import { FocusTrap } from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import SlideshowInner from './SlideshowInner';
 import Head from 'next/head';

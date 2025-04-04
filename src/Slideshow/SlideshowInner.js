@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IconChevronRight from './svg/IconChevronRight';
@@ -8,193 +8,152 @@ import IconClose from './svg/IconClose';
 import Poses from './Poses';
 import { animationDuration } from './animations';
 
-class SlideshowInner extends Component {
-  constructor(props) {
-    super(props);
-    let images = props.images;
+const SlideshowInner = ({
+  images: initialImages,
+  isFullscreen,
+  fullscreen,
+  fullscreenRef,
+  isBgOnclickActive,
+  isImageOnclickActive,
+  animation,
+  elementClass,
+  mobileAr,
+  media
+}) => {
+  const [index, setIndex] = useState(0);
+  const slideshowBgRef = useRef(null);
+  const images = initialImages.map((image, i) => ({ ...image, index: i }));
 
-    // Adds an index property to each image
-    images.forEach((image, i) => {
-      image.index = i;
-    });
+  const prevIndex = (i) => (i > 0 ? i - 1 : images.length - 1);
+  const nextIndex = (i) => (i < images.length - 1 ? i + 1 : 0);
 
-    this.state = {
-      index: 0,
-      images: images,
-      disabled: false
-    };
-  }
-
-  componentDidMount() {
-    this.slideshowBgRef = React.createRef();
-  }
-
-  prevIndex(i) {
-    return i > 0 ? i - 1 : this.state.images.length - 1;
-  }
-
-  nextIndex(i) {
-    return i < this.state.images.length - 1 ? i + 1 : 0;
-  }
-
-  getNearestImages = (images, index) => {
-    if (images.length < 3) {
-      return images;
-    } else {
-      return [
-        images[this.prevIndex(index)],
-        images[index],
-        images[this.nextIndex(index)]
-      ];
-    }
+  const getNearestImages = (index) => {
+    return images.length < 3
+      ? images
+      : [images[prevIndex(index)], images[index], images[nextIndex(index)]];
   };
 
-  prev = () => {
-    this.setState({
-      index: this.prevIndex(this.state.index),
-      disabled: true
-    });
+  const prev = useCallback(() => {
+    setIndex(prevIndex(index));
+    setTimeout(() => animationDuration);
+  }, [index]);
 
-    setTimeout(() => {
-      this.setState({ disabled: false });
-    }, animationDuration);
-  };
+  const next = useCallback(() => {
+    setIndex(nextIndex(index));
+    setTimeout(() => animationDuration);
+  }, [index]);
 
-  next = () => {
-    this.setState({
-      index: this.nextIndex(this.state.index),
-      disabled: true
-    });
+  const wrapKeyHandler = useCallback(
+    (event) => {
+      if (event.keyCode === 39) next();
+      if (event.keyCode === 37) prev();
+      if (event.keyCode === 27 && isFullscreen) {
+        fullscreen();
+        fullscreenRef.current?.focus();
+      }
+    },
+    [next, prev, isFullscreen, fullscreen, fullscreenRef]
+  );
 
-    setTimeout(() => {
-      this.setState({ disabled: false });
-    }, animationDuration);
-  };
+  const classes = classNames('slideshow', { [elementClass]: elementClass });
 
-  wrapKeyHandler = () => {
-    if (event.keyCode === 39) {
-      //arrow right key
-      this.next();
-    }
-    if (event.keyCode === 37) {
-      //arrow left key
-      this.prev();
-    }
-
-    if (event.keyCode === 27 && this.props.isFullscreen) {
-      // escape key
-      this.props.fullscreen();
-      this.props.fullscreenRef.current.focus();
-    }
-  };
-
-  render() {
-    const classes = classNames({
-      slideshow: true,
-      [this.props.elementClass]: this.props.elementClass
-    });
-    return (
-      <div
-        id="slideshow"
-        data-testid="slideshow"
-        className={`${
-          this.props.isFullscreen ? classes + ' fullscreen' : classes
-        }`}
+  return (
+    <div
+      id="slideshow"
+      data-testid="slideshow"
+      className={`${isFullscreen ? classes + ' fullscreen' : classes}`}
+    >
+      <button
+        aria-haspopup={!isFullscreen ? 'dialog' : false}
+        data-testid="fullscreen-button"
+        className="slideshow_fullscreen"
+        onClick={fullscreen}
+        ref={fullscreenRef}
+        onKeyUp={wrapKeyHandler}
       >
-        <button
-          aria-haspopup={!this.props.isFullscreen ? 'dialog' : false}
-          data-testid="fullscreen-button"
-          className="slideshow_fullscreen"
-          onClick={this.props.fullscreen}
-          ref={this.props.fullscreenRef}
-          onKeyUp={this.wrapKeyHandler}
-        >
-          {!this.props.isFullscreen && (
-            <>
-              <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
-              <span className="invisible" data-testid="icon-fullscreen">
-                Fullscreen Slideshow
-              </span>
-            </>
-          )}
-          {this.props.isFullscreen && (
-            <>
-              <IconClose
-                elementClass="slideshow_icon slideshow_icon-shrink"
-                aria-label="close"
-              />
-              <span className="invisible" data-testid="icon-shrink">
-                Exit Fullscreen Slideshow
-              </span>
-            </>
-          )}
-        </button>
-        <button
-          data-testid="prev-button"
-          aria-label="Icon Chevron Left"
-          className="slideshow_button slideshow_button-prev"
-          onClick={this.prev}
-          onKeyUp={this.wrapKeyHandler}
-        >
-          <IconChevronLeft elementClass="slideshow_icon" />
-          <span className="invisible">Previous Slide</span>
-        </button>
-        <>
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-          <div
-            className={`${
-              this.props.isFullscreen
-                ? 'slideshow_container fullscreen'
-                : 'slideshow_container'
-            }`}
-            aria-modal={this.props.isFullscreen}
-            aria-label="Slideshow container"
-            role={this.props.isFullscreen ? 'dialog' : false}
-            onClick={this.props.isImageOnclickActive}
-            onKeyUp={this.wrapKeyHandler}
-          >
-            {this.getNearestImages(this.state.images, this.state.index).map(
-              (image) => (
-                <Poses
-                  key={image.index}
-                  animation={this.props.animation}
-                  image={image}
-                  stateIndex={this.state.index}
-                  max={this.state.images.length}
-                  mobileAr={this.props.mobileAr}
-                  media={this.props.media}
-                />
-              )
-            )}
-          </div>
-        </>
-
-        <button
-          data-testid="next-button"
-          aria-label="Icon Chevron Right"
-          className="slideshow_button slideshow_button-next"
-          onClick={this.next}
-          onKeyUp={this.wrapKeyHandler}
-        >
-          <IconChevronRight elementClass="slideshow_icon" />
-          <span className="invisible">Next Slide</span>
-        </button>
+        {!isFullscreen && (
+          <>
+            <IconFullscreen elementClass="slideshow_icon slideshow_icon-fullscreen" />
+            <span className="invisible" data-testid="icon-fullscreen">
+              Fullscreen Slideshow
+            </span>
+          </>
+        )}
+        {isFullscreen && (
+          <>
+            <IconClose
+              elementClass="slideshow_icon slideshow_icon-shrink"
+              aria-label="close"
+            />
+            <span className="invisible" data-testid="icon-shrink">
+              Exit Fullscreen Slideshow
+            </span>
+          </>
+        )}
+      </button>
+      <button
+        data-testid="prev-button"
+        aria-label="Icon Chevron Left"
+        className="slideshow_button slideshow_button-prev"
+        onClick={prev}
+        onKeyUp={wrapKeyHandler}
+      >
+        <IconChevronLeft elementClass="slideshow_icon" />
+        <span className="invisible">Previous Slide</span>
+      </button>
+      <>
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
-          id="slideshowBg"
-          onClick={this.props.isBgOnclickActive}
-          onKeyUp={this.wrapKeyHandler}
-          role="figure"
-          data-testid="slideshowBg"
           className={`${
-            this.props.isFullscreen ? 'slideshow_bg fullscreen' : 'slideshow_bg'
+            isFullscreen
+              ? 'slideshow_container fullscreen'
+              : 'slideshow_container'
           }`}
-          ref={this.slideshowBgRef}
-        />
-      </div>
-    );
-  }
-}
+          aria-modal={isFullscreen}
+          aria-label="Slideshow container"
+          role={isFullscreen ? 'dialog' : false}
+          onClick={isImageOnclickActive}
+          onKeyUp={wrapKeyHandler}
+        >
+          {getNearestImages(images, index).map((image) => (
+            <Poses
+              key={image.url}
+              animation={animation}
+              image={image}
+              stateIndex={index}
+              max={images.length}
+              mobileAr={mobileAr}
+              media={media}
+            />
+          ))}
+        </div>
+      </>
+
+      <button
+        data-testid="next-button"
+        aria-label="Icon Chevron Right"
+        className="slideshow_button slideshow_button-next"
+        onClick={next}
+        onKeyUp={wrapKeyHandler}
+      >
+        <IconChevronRight elementClass="slideshow_icon" />
+        <span className="invisible">Next Slide</span>
+      </button>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      <div
+        id="slideshowBg"
+        onClick={isBgOnclickActive}
+        onKeyUp={wrapKeyHandler}
+        role="figure"
+        data-testid="slideshowBg"
+        className={`${
+          isFullscreen ? 'slideshow_bg fullscreen' : 'slideshow_bg'
+        }`}
+        ref={slideshowBgRef}
+      />
+    </div>
+  );
+};
 
 SlideshowInner.propTypes = {
   fullscreenRef: PropTypes.object,
