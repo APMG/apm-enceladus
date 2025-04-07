@@ -117,7 +117,7 @@ const SlideshowInner = ({
         >
           {getNearestImages(images, index).map((image) => (
             <Poses
-              key={image.url}
+              key={image.index}
               animation={animation}
               image={image}
               stateIndex={index}
