@@ -115,9 +115,9 @@ const SlideshowInner = ({
           onClick={isImageOnclickActive}
           onKeyUp={wrapKeyHandler}
         >
-          {getNearestImages(images, index).map((image) => (
+          {getNearestImages(index).map((image) => (
             <Poses
-              key={image.index}
+              key={image.id}
               animation={animation}
               image={image}
               stateIndex={index}
